@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Nova Tarefa</title>
+</head>
+<body>
+    <h1>Adicionar Nova Tarefa</h1>
+
+    <form method="POST">
+        {% csrf_token %} 
+        
+        {{ form.as_p }} 
+
+        <button type="submit">Salvar Tarefa</button>
+    </form>
+    
+    <p><a href="{% url 'lista_tarefas' %}">Voltar para a lista</a></p>
+
+</body>
+</html>

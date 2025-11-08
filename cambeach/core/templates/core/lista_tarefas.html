@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+</head>
+<body>
+    <h1>Minhas Tarefas do Django!</h1>
+
+    {% for tarefa in tarefas %}
+        <div>
+            <h2>{{ tarefa.titulo }}</h2>
+            <p><strong>Descrição:</strong> {{ tarefa.descricao }}</p>
+            <p><strong>Prazo:</strong> {{ tarefa.data_vencimento }}</p>
+            <p><strong>Urgência:</strong> {{ tarefa.get_urgencia_display }}</p>
+            <p><strong>Status:</strong> 
+                {% if tarefa.concluida %}
+                    ✅ Concluída
+                {% else %}
+                    ❌ Pendente
+                {% endif %}
+            </p>
+            <hr>
+        </div>
+    {% empty %}
+        <p>🎉 Não há tarefas cadastradas. Que tal adicionar uma?</p>
+    {% endfor %}
+
+</body>
+</html>
