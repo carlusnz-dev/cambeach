@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CamBeach - Criar-Campeonato</title>
+    <link rel="stylesheet" href="../CSS/criar-campeonato.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="logo">CamBeach</a>
+            <a href="campeonatos.html" class="btn-transparent">Voltar a Campeonatos</a>
+        </div>
+    </header>
+    <main class="login-container">
+            <div class="form-box">
+                <h1>Dados Campeonato</h1>
+                <form action="/login" method="post">
+
+                    <label for="nome-campeonato">Nome do Campeonato</label><br>
+                    <input type="text" id="nome-campeonato" name="nome-campeonato" required><br>
+
+                    <label for="local">Local</label><br>
+                    <input type="text" id="local" name="local" required><br>
+
+                    <label for="taxa">Taxa de Inscrição</label><br>
+                    <input type="text" placeholder="R$" inputmode="numeric" id="taxa" name="taxa" required ><br>
+
+                    <label for="data">Data</label><br>
+                    <input type="date" inputmode="numeric" id="data" name="data" required><br>
+
+                    <div class="gen">
+                    <label for="genro">Gênero:</label><br>
+                    <input class="masc" type="checkbox" id="masculino" name="sexo" value="masculino">
+                    <label for="masculino">Masculino</label>
+                    <input class="fem" type="checkbox" id="feminino" name="sexo" value="feminino">
+                    <label for="feminino">Feminino</label><br>
+                    </div>
+                    
+                    <div class="cat">
+                    <label for="categorias">Categoria:</label><br>
+                    <input type="checkbox" id="A" name="categoria" value="A">
+                    <label for="A">A</label>
+                    <input type="checkbox" id="B" name="categoria" value="B">
+                    <label for="B">B</label>
+                    <input type="checkbox" id="C" name="categoria" value="C">
+                    <label for="C">C</label>
+                    <input type="checkbox" id="D" name="categoria" value="D">
+                    <label for="D">D</label>
+                    <input type="checkbox" id="E" name="categoria" value="E">
+                    <label for="E">E</label><br>
+                    </div>
+                    <label for="participantes">Número de Participantes</label>
+                    <input type="number" max="24">
+
+                    <button type="submit" class="btn-primary">Enviar Solicitação</button>
+</body>
+</html>

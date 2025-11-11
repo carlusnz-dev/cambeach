@@ -3,27 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Campeonatos</title>
+    <title>CamBeach - Criar Campeonatos</title>
     <link rel="stylesheet" href="../CSS/organizador.css">
 </head>
 <body>
-  <header>
-    <h1 class="Titulo">Criar Campeonato</h1>
-    <nav>
-      <ul>
-        <li><a href="inicio.html">Início</a></li>
-        <li><a href="campeonatos.html">Campeonatos</a></li>
-        <li><a href="suporte">Suporte</a></li>
-        <li><a href="cadastro.html">Cadastro/Login</a></li>
-        <li><a href="criar.html">Criar Campeonato</a></li>
-      </ul>
-    </nav>
-</header>
-  <body>
+    <header class="site-header">
+      <div class="container">
+        <a href="/" class="logo">CamBeach</a>
+        <a href="inicio.html" class="btn-transparent">Voltar a Início</a>
+      </div>
+    </header>
     <main class="login-container">
         <div class="form-box">
             <h1>Informações Organizador</h1>
-            <form action="/cadastro" method="post">
+            <form action="/campeonato" method="post">
                 <label for="nome">Nome Completo:</label><br>
                 <input type="text" id="nome" name="nome" required><br>
 

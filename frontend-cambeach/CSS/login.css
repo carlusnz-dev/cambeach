@@ -60,14 +60,14 @@ body {
     margin-right: auto;
 }
 
-.form-box {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
+    .form-box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 16px 8px rgba(0, 0, 0, 0.1);
+    }
 
 .form-box h1 {
     margin-bottom: 24px;
