@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Campeonatos</title>
+    <link rel="stylesheet" href="../CSS/organizador.css">
+</head>
+<body>
+  <header>
+    <h1 class="Titulo">Criar Campeonato</h1>
+    <nav>
+      <ul>
+        <li><a href="inicio.html">Início</a></li>
+        <li><a href="campeonatos.html">Campeonatos</a></li>
+        <li><a href="suporte">Suporte</a></li>
+        <li><a href="cadastro.html">Cadastro/Login</a></li>
+        <li><a href="criar.html">Criar Campeonato</a></li>
+      </ul>
+    </nav>
+</header>
+  <body>
+    <main class="login-container">
+        <div class="form-box">
+            <h1>Informações Organizador</h1>
+            <form action="/cadastro" method="post">
+                <label for="nome">Nome Completo:</label><br>
+                <input type="text" id="nome" name="nome" required><br>
+
+                <label for="cpf">CPF</label><br>
+                <input type="text" inputmode="numeric" id="cpf" name="CPF" required><br>
+
+                <label for="idade">Data de Nascimento</label><br>
+                <input type="date" id="idade" name="idade" required><br>
+
+                <label for="telefone">Telefone</label><br>
+                <input type="number" placeholder="(99) 99999-9999" inputmode="numeric" id="telefone" name="telefone"
+                    required><br>
+
+                <label for="email">Email</label><br>
+                <input type="email" id="email" name="email" required><br>
+
+                <div class="gen">
+                <label for="genro">Gênero:</label><br>
+                <input class="masc" type="radio" id="masculino" name="sexo" value="masculino">
+                <label for="masculino">Masculino</label>
+                <input class="fem" type="radio" id="feminino" name="sexo" value="feminino">
+                <label for="feminino">Feminino</label><br>
+                </div>
+                <button type="submit" class="btn-primary">Solicitar Criação de Campeonato</button>
+        </div>
+    </main>
+</body>
+</html>
