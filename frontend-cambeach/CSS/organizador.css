@@ -1,26 +1,6 @@
 @import 'style.css';
 
-header {
-    background-color: #003f8a;
-    color: white;
-    text-align: center;
-    padding: 15px;
-}
 .Titulo {
-    color: white;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-nav a {
-    text-decoration: none;
     color: white;
 }
 
