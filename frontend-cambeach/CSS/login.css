@@ -90,6 +90,8 @@
       margin-bottom: 16px;
       outline: none;
       transition: border-color 0.2s;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
     .form-box input:focus {
