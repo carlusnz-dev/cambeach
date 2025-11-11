@@ -1,4 +1,4 @@
-:root {
+    :root {
       --azul-claro: #a5d8ff;
       --azul-escuro: #003f8a;
       --branco: #ffffff;
@@ -155,8 +155,8 @@
       text-align: center;
       padding: 12px 0;
     }
-.link_cad {
+    .link_cad {
       text-decoration: none;
       color: black;
-     
+      
     }
