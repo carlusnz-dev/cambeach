@@ -1,0 +1,43 @@
+@import 'style.css';
+
+.blocos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.bloco {
+  background-color: #004c97;
+  color: white;
+  border-radius: 10px;
+  width: 280px;
+  min-height: 220px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.bloco:nth-child(1) {
+  transform: translateY(0);
+}
+
+.bloco:nth-child(2) {
+  transform: translateY(60px);
+}
+
+.bloco:nth-child(3) {
+  transform: translateY(60px);
+}
+
+@media (max-width: 768px) {
+  .bloco {
+    width: 90%;
+    transform: translateY(0);
+  }
+
+
+}
