@@ -1,0 +1,49 @@
+{% load static %}<!DOCTYPE html>
+<html lang="pt-br">
+
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CamBeach - Login</title>
+    <link rel="stylesheet" href="{% static 'users/CSS/login.css' %}">
+
+    <head>
+
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <a href="{% url 'inicio'%}" class="logo">CamBeach</a>
+                <a href="{% url 'inicio'%}" class="btn-transparent">Voltar a Início</a>
+                <a href="{% url 'inicio'%}" class="btn-transparent">Voltar a Home</a>
+            </div>
+        </header>
+
+        <main class="login-container">
+            <div class="form-box">
+                <h1>Login</h1>
+                <form action="/login" method="post">
+                    <label for="numbers">CPF</label>
+                    <input type="text" inputmode="numeric" id="cpf" name="CPF" required>
+
+                    <label for="senha">Senha</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="senha" name="senha" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+                <p>Não tem conta? <a class="link_cad" href="{% url 'cadastro' %}">Cadastre-se aqui</a></p>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                &copy; 2025 Campeonatos Beach Tennis
+            </div>
+        </footer>
+
+       
+    </body>
+</head>
+
+</html>

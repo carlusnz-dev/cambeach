@@ -1,20 +1,20 @@
-{%load static %}<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CamBeach</title>
-    <link rel="stylesheet" href="{% static 'cambeach_app/CSS/style.css'%}">
-    <link rel="stylesheet" href="{% static 'cambeach_app/CSS/inicio.css'%}">
+    <link rel="stylesheet" href="{% static 'cambeach_app/CSS/inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'cambeach_app/CSS/style.css' %}">
 </head>
 <body>
     <header>
     <h1>CamBeach</h1>
     <nav>
       <ul>
-        <li><a href="inicio.html">Início</a></li>
+        <li><a href="{% url 'inicio' %}">Início</a></li>
         <li><a href="campeonatos.html">Campeonatos</a></li>
-        <li><a href="login.html">Cadastro/Login</a></li>
+        <li><a href="{% url 'login' %}">Cadastro/Login</a></li>
         <li><a href="organizador.html">Login Organizador</a></li>
         <li><a href="suporte">Suporte</a></li>
       </ul>
