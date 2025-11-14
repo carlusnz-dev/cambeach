@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CamBeach</title>
+        <link rel="stylesheet" href="../CSS/inicio.css" />
+    </head>
+    <body>
+        <header>
+            <div class="nav-top-row">
+                <a href="#" class="brand-link">
+                    <div class="logo-placeholder">
+                        <img src="../Assets/Logo Stroked.svg" alt="logo" />
+                    </div>
+                    <span class="brand-text">CamBeach</span>
+                </a>
+
+                <button
+                    id="mobile-menu-button"
+                    class="mobile-menu-button"
+                    aria-label="Abrir menu"
+                >
+                    <div class="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </div>
+
+            <nav class="nav-links-row">
+                <ul class="nav-desktop-list">
+                    <li><a href="inicio.html" class="nav-link">Início</a></li>
+                    <li>
+                        <a href="campeonatos.html" class="nav-link"
+                            >Campeonatos</a
+                        >
+                    </li>
+                    <li>
+                        <a href="login.html" class="nav-link">Cadastro/Login</a>
+                    </li>
+                    <li>
+                        <a href="organizador.html" class="nav-link"
+                            >Login Organizador</a
+                        >
+                    </li>
+                    <li><a href="suporte" class="nav-link">Suporte</a></li>
+                </ul>
+            </nav>
+
+            <div id="mobile-menu" class="mobile-menu hidden-menu">
+                <ul class="mobile-menu-list">
+                    <li><a href="inicio.html">Início</a></li>
+                    <li><a href="campeonatos.html">Campeonatos</a></li>
+                    <li><a href="login.html">Cadastro/Login</a></li>
+                    <li><a href="organizador.html">Login Organizador</a></li>
+                    <li><a href="suporte.html">Suporte</a></li>
+                </ul>
+            </div>
+        </header>
+        <main>
+            <div class="blocos">
+                <div class="bloco">
+                    <h2>Bem-vindo ao nosso Site!</h2>
+                    <p>
+                        Somos um site onde você pode: se inscrever, divulgar e
+                        procurar campeonatos que forem perto da sua região ou
+                        campeonatos de seu interesse. Desenvolvemos essa página
+                        com o intuito de ajudar a comunidade de Beach Tennis a
+                        crescer ainda mais no Brasil.
+                    </p>
+                </div>
+
+                <div class="bloco">
+                    <h2>Como funciona?</h2>
+                    <p>
+                        Primeiro você cria a sua conta, após isso, você poderá
+                        se inscrever nos campeonatos. Também temos a opção de
+                        visitante, a qual você não pode se inscrever nos
+                        campeonatos, mas pode acompanhá-los.
+                    </p>
+                </div>
+
+                <div class="bloco">
+                    <h2>Quem pode criar um campeonato?</h2>
+                    <p>
+                        Qualquer um pode criar um campeonato, mesmo que seja só
+                        para diversão, competir com pessoas diferentes, ganhar
+                        experiência, conhecer gente nova, e claro: para vencer!
+                    </p>
+                </div>
+            </div>
+        </main>
+    </body>
+
+    <script>
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden-menu');
+            });
+        } else {
+            console.error('btn not found');
+        }
+    </script>
+</html>
