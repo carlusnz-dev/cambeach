@@ -35,4 +35,18 @@
         </p>
     </div>
 </div>
+
+{% comment %} <h1>TESTES</h1>
+<div>
+    {% for category in categories %}
+    <div style="display: flex">
+        <p>{{ category.name }}</p>
+        <p>{{ category.get_genre_display }}</p>
+        <a href="{% url "category_update" category.pk %}">Editar</a>
+        <a href="{% url "category_delete" category.pk %}">Excluir</a>
+    </div>
+    {% endfor %}
+
+    <a href="{% url "category_create" %}">criar</a>
+</div> {% endcomment %}
 {% endblock content %} 
