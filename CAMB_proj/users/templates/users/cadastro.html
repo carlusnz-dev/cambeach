@@ -36,7 +36,6 @@
                 {{ form.username }}<br>
                 <div class="form-error">{{ form.username.errors }}</div>
 
-
                 {{ form.cpf.label_tag }}<br>
                 {{ form.cpf }}<br>
                 <div class="form-error">{{ form.cpf.errors }}</div>
@@ -54,7 +53,7 @@
                 {{ form.email }}<br>
                 <div class="form-error">{{ form.email.errors }}</div>
 
-                <div class="form-group">
+                {% comment %} <div class="form-group">
                     <label>{{ form.genero.label_tag }}</label><br>
                     <div class="form-error">{{ form.genero.errors }}</div>
                     <div class="gen">
@@ -68,17 +67,25 @@
                         {% endfor %}
 
                     </div>
-                </div> <div class="form-group">
-                    <label>{{ form.categoria.label_tag }}</label><br>
-                    <div class="form-error">{{ form.categoria.errors }}</div>
+                </div>  {% endcomment %}
+
+                {% comment %} <div class="form-group">
+                    <label>{{ form.categoria_de_jogo.label_tag }}</label><br>
+                    <div class="form-error">{{ form.categoria_de_jogo.errors }}</div>
                     <div class="cat">
-                        {% for radio in form.categoria %}
+                        {% for radio in form.categoria_de_jogo %}
                             <div class="radio-item">
                                 {{ radio.tag }}
                                 <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
                             </div>
                         {% endfor %}
                     </div>
+                </div> {% endcomment %}
+
+                <div class="form-group">
+                    {{ form.categoria_de_jogo.label_tag }}
+                    <div class="form-error">{{ form.categoria_de_jogo.errors }}</div>
+                    {{ form.categoria_de_jogo }}
                 </div>
 
                 {{ form.password1.label_tag }}<br>
