@@ -87,6 +87,7 @@ input[type='number']::-webkit-outer-spin-button {
 
 .cat {
     display: flex;
+    flex-wrap: wrap; 
     margin-top: 20px;
 }
 .masc {
@@ -118,4 +119,28 @@ input[type='number']::-webkit-outer-spin-button {
     align-items: center;
     text-align: center;
     margin-top: 20px;
+}
+
+.radio-container-horizontal {
+    display: flex;       /* Faz os itens internos (as opções) ficarem lado a lado */
+    flex-wrap: wrap;     /* Se não couber, quebra a linha */
+    gap: 15px;           /* Um espaço entre cada opção (ajuste se quiser) */
+    margin-top: 5px;     /* Um espacinho abaixo do label "Gênero" ou "Categoria" */
+    margin-bottom: 10px; /* Um espaço antes do próximo campo */
+}
+
+.radio-item {
+    display: flex;         /* Faz o <input> (bolinha) e o <label> (texto) ficarem alinhados */
+    align-items: center;   /* Centraliza eles verticalmente */
+}
+
+.radio-item input[type="radio"] {
+    margin-right: 5px;     /* Espaço entre a bolinha e o texto */
+}
+
+.form-error, .form-errors {
+    color: #a94442; /* Um tom de vermelho */
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 10px;
 }

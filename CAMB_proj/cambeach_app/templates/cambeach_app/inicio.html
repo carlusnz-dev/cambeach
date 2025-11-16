@@ -14,7 +14,11 @@
       <ul>
         <li><a href="{% url 'inicio' %}">Início</a></li>
         <li><a href="campeonatos.html">Campeonatos</a></li>
-        <li><a href="{% url 'login' %}">Cadastro/Login</a></li>
+        {% if  user.is_authenticated%}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
+        {% endif %}
         <li><a href="organizador.html">Login Organizador</a></li>
         <li><a href="suporte">Suporte</a></li>
       </ul>

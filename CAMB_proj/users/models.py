@@ -1,55 +1,45 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser ,Group , Permission
+from django.contrib.auth.models import AbstractUser 
 
 class Atleta(AbstractUser):
 
+    username = None 
+    email = models.EmailField(unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = [] 
+    
+    class genero(models.TextChoices):
+        MASCULINO = 'M', 'Masculino'
+        FEMININO = 'F', 'Feminino'  
+    
+    class categoria(models.TextChoices):
+        A = 'A', 'A'
+        B = 'B', 'B'
+        C = 'C', 'C'
+        D = 'D', 'D'
+        E = 'E', 'E'
 
 
-    groups = models.ManyToManyField(
-        Group,
-        blank=True,
-        help_text=(
-            "Os grupos aos quais este atleta pertence. Um atleta terá todas as permissões "
-            "concedidas a cada um dos seus grupos."
-        ),
-        related_name="atleta_groups"  # <--- Este é o novo apelido único
-    )
-
-    user_permissions = models.ManyToManyField(
-        Permission,
-        blank=True,
-        help_text="Permissões específicas para este atleta.",
-        related_name="atleta_permissions" # <--- Este é o outro novo apelido
+    cpf = models.CharField(max_length=14, unique=True)
+    telefone = models.CharField(max_length=15, blank=True, null=True)
+    data_de_nascimento = models.DateField(blank=True , null=True)
+    
+    genero = models.CharField(
+        max_length=1,
+        choices=genero.choices,
+        blank=False , 
+        null=False
     )
     
-    is_arbitro = models.BooleanField(
-    default=False 
+    categoria = models.CharField(
+        max_length=1,
+        choices=categoria.choices,
+        blank=False,
+        null =False
     )
-    GENERO_CHOICES = [
-        ('M', 'Masculino'),
-        ('F', 'Feminino'),
-        ('O', 'Outro'),
-    ]
-    
-    CATEGORIA_CHOICES = [
-        ('A', 'Categoria A'),
-        ('B', 'Categoria B'),
-        ('C', 'Categoria C'),
-        ('D', 'Categoria D'),
-        ('PRO', 'Profissional'),
-    ]
-
-    email = models.EmailField(unique=True) 
-    nome_completo = models.CharField(max_length=255) 
-    genero = models.CharField(max_length=1, choices=GENERO_CHOICES, null=True, blank=True)
-    categoria = models.CharField(max_length=3, choices=CATEGORIA_CHOICES, null=True, blank=True)
-    idade = models.IntegerField(null=True, blank=True)
-    telefone = models.CharField(max_length=15, null=True, blank=True)
-    CPF = models.CharField(max_length=11, unique=True, verbose_name="CPF")
-    
-    USERNAME_FIELD = 'email' 
-    REQUIRED_FIELDS = ['username', 'nome_completo'] # Campos pedidos no 'createsuperuser'
-
+        
     def __str__(self):
         return self.email
     
+

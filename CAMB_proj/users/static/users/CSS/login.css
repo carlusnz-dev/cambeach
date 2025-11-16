@@ -159,3 +159,14 @@ body {
     text-decoration: none;
     color: black;
 }
+
+.form-errors {
+    color: #a94442; 
+    background-color: #f2dede; 
+    border: 1px solid #ebccd1;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
