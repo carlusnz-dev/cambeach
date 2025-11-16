@@ -8,3 +8,6 @@ class Gender(models.IntegerChoices):
 class Category(models.Model):
     name = models.CharField(max_length=30, null=False)
     genre = models.SmallIntegerField(choices=Gender)
+    
+    def __str__(self):
+        return self.name
