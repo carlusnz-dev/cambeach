@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Category, Tournament
 from .forms import CategoryForm, TournamentForm
 
@@ -31,12 +32,13 @@ def category_form(request, pk=None):
     return render(request, 'category_form.html', context)
 
 def category_delete(request, pk):
-    category = get_object_or_404(Category, pk)
+    category = get_object_or_404(Category, pk=pk)
     
     category.delete()
     return redirect('inicio')
 
 # Tournament
+@login_required
 def tournament_form(request, pk=None):
     tournament = None
     
@@ -46,15 +48,18 @@ def tournament_form(request, pk=None):
     if request.method == 'POST':
         form = TournamentForm(request.POST, instance=tournament)
         if form.is_valid():
+            tournament = form.save(commit=False)
+            tournament.user = request.user
             form.save()
-            return redirect('tournament_create')    
+            form.save_m2m()
+            return redirect('tournament_create')
     else:
         form = TournamentForm(instance=tournament)
         
     context = {'form': form, 'tournament': tournament}
     return render(request, 'tournament_form.html', context)
 
-def tornament(request):
+def tournament(request):
     return render(request, 'campeonatos.html')
 
 def organizador(request):

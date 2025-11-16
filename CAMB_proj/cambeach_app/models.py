@@ -20,5 +20,8 @@ class Tournament(models.Model):
     end_date = models.DateField(null=False)
     n_players = models.SmallIntegerField()
     
+    # User
+    user = models.ForeignKey("users.Atleta", on_delete=models.CASCADE)
+    
     # Category
     categories = models.ManyToManyField(Category)

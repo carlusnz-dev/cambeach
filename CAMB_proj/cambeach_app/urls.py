@@ -5,7 +5,9 @@ urlpatterns = [
     path('', views.inicio, name='inicio'),
     
     # Torneios
+    path('tornament', views.tournament, name='tornament'),
     path('torneio/create/', views.tournament_form, name='tournament_create'),
+    path('torneio/update/<int:pk>/', views.tournament_form, name='tournament_edit'),
     
     # Categorias
     path('category/create/', views.category_form, name='category_create'),
