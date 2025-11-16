@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.inicio, name='home'),
+    path('', views.inicio, name='inicio'),
     
     # Categorias
     path('create/', views.category_form, name='category_create'),
