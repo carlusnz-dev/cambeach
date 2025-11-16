@@ -1,0 +1,152 @@
+
+
+body {
+  font-family: "Arial";
+  background: #f8f8f8;
+  margin: 0;
+}
+:root {
+    --azul-claro: #a5d8ff;
+    --azul-escuro: #003f8a;
+    --branco: #ffffff;
+    --cinza-claro: #f4f6f8;
+}
+
+.site-header {
+    background: var(--branco);
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.site-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: var(--azul-escuro);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-transparent {
+    background: transparent;
+    color: var(--azul-escuro);
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 2px solid var(--azul-escuro);
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-transparent:hover {
+    background: var(--azul-escuro);
+    color: var(--branco);
+}
+
+
+.container {
+  width: 90%;
+  margin: 30px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #003f8a;
+}
+
+h2 {
+  color: #003f8a;
+  text-align: center;
+}
+
+.bloco-grupo {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  width: 400px;
+  margin-left: 70px;
+  margin-right: 70px;
+
+}
+
+.grupos {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+
+
+}
+
+
+.eliminatoria {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  width: 700px;
+  text-align: center;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.partida {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+input[type="number"] {
+  width: 50px;
+  text-align: center;
+}
+
+.vencedor {
+  text-align: center;
+  margin-top: 50px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+}
+
+button {
+  display: flex;
+  margin: 40px auto;
+  padding: 20px 20px;
+  background: #003f8a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+}
+
+button:hover {
+  background: #002f6c;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}

@@ -1,23 +1,54 @@
-@import 'style.css';
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    background: white;
+}
 
-.Titulo {
+.site-header {
+    background: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.site-header .container {
+    max-width: 1200px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin-right: auto;
+    color: #003f8a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-transparent {
+    background: transparent;
+    color: #003f8a;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 2px solid #003f8a;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-transparent:hover {
+    background: #003f8a;
     color: white;
 }
-
-.login-container {
+.container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: auto;
     padding: 20px;
-    width: 500px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 40px;
-}
-
-main {
-  padding: 50px 0;
+    
 }
 
 .form-box {
@@ -26,7 +57,7 @@ main {
     border-radius: 12px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    box-shadow: 0 0 8px 8px rgba(0,0,0,0.1);
 }
 h1 {
     margin-bottom: 24px;
@@ -42,28 +73,26 @@ input {
     border-radius: 6px;
     font-size: 1rem;
 }
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 .gen {
-        display: flex;
-        margin-top: 20px;
+    display: flex;
+    margin-top: 20px;
 }
+
 .masc {
     margin-right: -50px;
 }
 .fem {
     margin-right: -50px;
 }
-.pass {
-    margin-top: 40px;
-}
+
 .btn-primary {
     width: 100%;
     padding: 14px;
-    margin-top: 20px;
     background: #003f8a;
     color: white;
     border: none;
@@ -76,4 +105,20 @@ input[type=number]::-webkit-outer-spin-button {
 
 .btn-primary:hover {
     background: #002f6c;
+}
+.login-link {
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 20px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
 }
