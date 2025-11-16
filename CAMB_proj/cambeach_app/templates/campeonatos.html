@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CamBeach - Campeonatos{% endblock title %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'CSS/campeonatos.css' %}" />
+{% endblock extra_css %}
+
+
+{% block content %}
+
+        <main>
+            <section class="busca" id="hero">
+                <h2>Campeonatos Disponíveis</h2>
+                <input
+                    type="text"
+                    name="pesquisa"
+                    id="pesquisa"
+                    placeholder="Pesquisar Campeonatos"
+                />
+            </section>
+
+            <div class="container">
+                <div class="box">
+                    <h3>Campeonato 1</h3>
+                    <p>Data</p>
+                    <p>Local</p>
+                    <p>Valor da inscrição</p>
+                    <p>Premiação</p>
+                     <div class="a">
+        <a class="btn primary" >Inscrever-se</a>
+        <a class="btn secondary" href="chaves.html">Ver Chaves</a>
+      </div>
+                </div>
+                <div class="box">
+                    <h3>Campeonato 2</h3>
+                    <p>Data</p>
+                    <p>Local</p>
+                    <p>Valor da inscrição</p>
+                    <p>Premiaçao</p>
+                    <div class="a">
+        <a class="btn primary" >Inscrever-se</a>
+        <a class="btn secondary" href="chaves.html">Ver Chaves</a>
+                    </div>
+                </div>
+                <div class="box">
+                    <h3>Campeonato 3</h3>
+                    <p>Data</p>
+                    <p>Local</p>
+                    <p>Valor da inscrição</p>
+                    <p>Premiação</p>
+                    <div class="a">
+        <a class="btn primary" >Inscrever-se</a>
+        <a class="btn secondary" href="chaves.html">Ver Chaves</a>
+                    </div>
+                </div>
+                <div class="box">
+                    <h3>Campeonato 4</h3>
+                    <p>Data</p>
+                    <p>Local</p>
+                    <p>Valor da inscrição</p>
+                    <p>Premiação</p>
+                    <div class="a">
+        <a class="btn primary" >Inscrever-se</a>
+        <a class="btn secondary" href="chaves.html">Ver Chaves</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
+{% endblock content %}

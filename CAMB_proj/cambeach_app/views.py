@@ -36,3 +36,6 @@ def category_delete(request, pk):
     
     category.delete()
     return redirect('home')
+
+def tornament(request):
+    return render(request, 'campeonatos.html')
