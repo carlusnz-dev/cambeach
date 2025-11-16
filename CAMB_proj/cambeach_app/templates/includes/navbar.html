@@ -33,7 +33,7 @@
           <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
         {% endif %}
         <li>
-            <a href="organizador.html" class="nav-link">Login Organizador</a>
+            <a href="{% url  'organizador' %}" class="nav-link">Organizador</a>
         </li>
         <li><a href="suporte" class="nav-link">Suporte</a></li>
     </ul>
@@ -48,7 +48,7 @@
         {% else %}
           <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
         {% endif %}
-        <li><a href="organizador.html">Login Organizador</a></li>
+        <li><a href="{% url  'organizador' %}">Login Organizador</a></li>
         <li><a href="suporte.html">Suporte</a></li>
     </ul>
 </div>

@@ -23,7 +23,7 @@ def category_form(request, pk=None):
         
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('inicio')
     else:
         form = CategoryForm(instance=category)
         
@@ -34,7 +34,7 @@ def category_delete(request, pk):
     category = get_object_or_404(Category, pk)
     
     category.delete()
-    return redirect('home')
+    return redirect('inicio')
 
 # Tournament
 def tournament_form(request, pk=None):
@@ -56,3 +56,11 @@ def tournament_form(request, pk=None):
 
 def tornament(request):
     return render(request, 'campeonatos.html')
+
+def organizador(request):
+    return render(request, 'organizador.html')
+
+def create_tournament_page(request):
+    return render(request, 'criar_campeonato.html')
+def chaves(request):
+    return render(request, 'chaves.html')
