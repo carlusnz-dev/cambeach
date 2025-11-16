@@ -23,6 +23,8 @@ class TournamentForm(forms.ModelForm):
         input_formats=['%Y-%m-%d', '%d/%m/%Y']
     )
     
+   # Meta 
+    
     class Meta:
         model = Tournament
         fields = ('name', 'local', 'organization', 'start_date', 'end_date', 'n_players', 'categories')
