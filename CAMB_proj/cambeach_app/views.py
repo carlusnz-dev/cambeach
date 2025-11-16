@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Category, Gender
-from .forms import CategoryForm
+from .models import Category, Tournament
+from .forms import CategoryForm, TournamentForm
 
 def inicio(request):
     categories = Category.objects.all()
@@ -24,7 +24,6 @@ def category_form(request, pk=None):
         if form.is_valid():
             form.save()
             return redirect('home')
-        
     else:
         form = CategoryForm(instance=category)
         
@@ -36,3 +35,21 @@ def category_delete(request, pk):
     
     category.delete()
     return redirect('home')
+
+# Tournament
+def tournament_form(request, pk=None):
+    tournament = None
+    
+    if pk:
+        tournament = get_object_or_404(Tournament, pk=pk)
+    
+    if request.method == 'POST':
+        form = TournamentForm(request.POST, instance=tournament)
+        if form.is_valid():
+            form.save()
+            return redirect('tournament_create')    
+    else:
+        form = TournamentForm(instance=tournament)
+        
+    context = {'form': form, 'tournament': tournament}
+    return render(request, 'tournament_form.html', context)
