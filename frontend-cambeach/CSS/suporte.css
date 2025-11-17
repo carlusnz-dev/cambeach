@@ -1,1 +1,114 @@
 @import 'style.css';
+
+@media (min-width: 768px) {
+    .mobile-menu-button {
+        display: none;
+    }
+    .mobile-menu {
+        display: none !important;
+    }
+    .nav-desktop-list {
+        display: flex;
+    }
+
+    .nav-top-row {
+        justify-content: center;
+        height: auto;
+        padding: 1rem;
+    }
+    .brand-text {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-top-row {
+        padding: 0 1rem;
+    }
+
+    .bloco {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 20px;
+        transform: translateY(0) !important;
+    }
+
+    .blocos {
+        padding-top: 0;
+    }
+}
+
+.suporte-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 2%;
+}
+
+h1 {
+    font-size: 200%;
+    margin-bottom: 2%;
+}
+
+.descricao {
+    color: #555;
+    margin-bottom: 5%;
+    font-size: 100%;
+}
+
+.suporte-conteudo {
+    display: flex;
+    gap: 5%;
+    width: 100%;
+}
+
+.faq {
+    width: 50%;
+}
+
+.faq-item {
+    background: #f5f5f5;
+    padding: 5%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+}
+
+.faq-item h3 {
+    margin: 0 0 2% 0;
+    font-size: 110%;
+}
+
+.formulario-suporte {
+    width: 50%;
+    background: #fafafa;
+    padding: 5%;
+    border-radius: 10px;
+}
+
+.formulario-suporte input,
+.formulario-suporte textarea {
+    width: 100%;
+    padding: 3%;
+    margin-bottom: 5%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 3%;
+    background: #003f8a;
+    border: none;
+    color: white;
+    font-size: 110%;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #002f6c;
+}
+
+.info-contato {
+    margin-top: 5%;
+    color: #444;
+}

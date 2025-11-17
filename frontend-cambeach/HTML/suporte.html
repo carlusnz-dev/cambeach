@@ -4,26 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../CSS/suporte.css">
 </head>
 <body>
     <header>
-        <div class="nav-top-row">
-            <a href="#" class="brand-link">
-                <div class="logo-placeholder">
-                    <img src="../Assets/Logo Stroked.svg" alt="logo" />
-                </div>
-                <span class="brand-text">CamBeach</span>
-            </a>
+            <div class="nav-top-row">
+                <a href="#" class="brand-link">
+                    <div class="logo-placeholder">
+                        <img src="../Assets/Logo Stroked.svg" alt="logo" />
+                    </div>
+                </a>
+            </div>
+
+            <nav class="nav-links-row">
+                <ul class="nav-desktop-list">
+                    <li><a href="inicio.html" class="nav-link">Início</a></li>
+                    <li><a href="campeonatos.html" class="nav-link">Campeonatos</a></li>
+                    <li><a href="login.html" class="nav-link">Cadastro/Login</a></li>
+                    <li><a href="suporte.html" class="nav-link">Suporte</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+        <div class="suporte-container">
+    <h1>Suporte</h1>
+    <p class="descricao">Estamos aqui para ajudar! Envie sua dúvida ou veja as perguntas mais frequentes.</p>
+
+    <div class="suporte-conteudo">
+        <div class="faq">
+            <h2>Perguntas Frequentes</h2>
+
+            <div class="faq-item">
+                <h3>Como faço cadastro?</h3>
+                <p>Basta ir até a tela de cadastro, preencher seus dados e clicar em "Criar conta".</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Esqueci minha senha, e agora?</h3>
+                <p>Use a opção “Recuperar senha” na tela de login.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Onde vejo minhas informações?</h3>
+                <p>No menu do usuário, clique em "Perfil".</p>
+            </div>
         </div>
-        <div id="mobile-menu" class="mobile-menu hidden-menu">
-            <ul class="mobile-menu-list">
-                <li><a href="inicio.html">Início</a></li>
-                <li><a href="campeonatos.html">Campeonatos</a></li>
-                <li><a href="login.html">Cadastro/Login</a></li>
-                <li><a href="organizador.html">Login Organizador</a></li>
-                <li><a href="suporte">Suporte</a></li>
-            </ul>
+
+        <div class="formulario-suporte">
+            <h2>Fale com o Suporte</h2>
+
+            <form>
+                <label>Nome</label>
+                <input type="text" placeholder="Seu nome">
+
+                <label>Email</label>
+                <input type="email" placeholder="Seu email">
+
+                <label>Mensagem</label>
+                <input placeholder="Digite sua mensagem"></input>
+
+                <button>Enviar</button>
+            </form>
+
+            <p class="info-contato">
+                Ou entre em contato diretamente:<br>
+                📧 suporte@seudominio.com<br>
+                📞 (11) 99999-9999<br>
+                🕒 Atendimento: 08h–18h
+            </p>
         </div>
-    </header>    
+    </div>
+</div>
+
 </body>
 </html>
