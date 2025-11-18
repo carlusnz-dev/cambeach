@@ -1,0 +1,109 @@
+{% load static %}<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CamBeach - Cadastro</title>
+    <link rel="stylesheet" href="{% static 'users/CSS/cadastro.css' %}">
+</head>
+<header class="site-header">
+    <div class="container">
+        <a href="{% url 'inicio' %}" class="logo">CamBeach</a>
+        <a href="{% url 'inicio' %}" class="btn-transparent">Voltar a Início</a>
+    </div>
+</header>
+
+<body>
+{% block content  %}
+    <main class="login-container">
+        <div class="form-box">
+            <h1>Cadastro</h1>
+            <form action="{% url 'cadastro'%}" method="post">
+                {% csrf_token %}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
+                {{ form.first_name.label_tag }}<br>
+                {{ form.first_name }}<br>
+                <div class="form-error">{{ form.first_name.errors }}</div>
+
+                {{ form.last_name.label_tag }}<br>
+                {{ form.last_name }}<br>
+                <div class="form-error">{{ form.last_name.errors }}</div>
+
+                {{ form.username.label_tag }}<br>
+                {{ form.username }}<br>
+                <div class="form-error">{{ form.username.errors }}</div>
+
+                {{ form.cpf.label_tag }}<br>
+                {{ form.cpf }}<br>
+                <div class="form-error">{{ form.cpf.errors }}</div>
+
+                {{ form.data_de_nascimento.label_tag }}<br>
+                {{ form.data_de_nascimento }}<br>
+                <div class="form-error">{{ form.data_de_nascimento.errors }}</div>
+
+                {{ form.telefone.label_tag }}<br>
+                {{ form.telefone }}<br>
+                <div class="form-error">{{ form.telefone.errors }}</div>
+
+
+                {{ form.email.label_tag }}<br>
+                {{ form.email }}<br>
+                <div class="form-error">{{ form.email.errors }}</div>
+
+                {% comment %} <div class="form-group">
+                    <label>{{ form.genero.label_tag }}</label><br>
+                    <div class="form-error">{{ form.genero.errors }}</div>
+                    <div class="gen">
+                        {% for radio in form.genero %}
+                            <div class="radio-item">
+                                {{ radio.tag }}
+                                <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                </div>  {% endcomment %}
+
+                {% comment %} <div class="form-group">
+                    <label>{{ form.categoria_de_jogo.label_tag }}</label><br>
+                    <div class="form-error">{{ form.categoria_de_jogo.errors }}</div>
+                    <div class="cat">
+                        {% for radio in form.categoria_de_jogo %}
+                            <div class="radio-item">
+                                {{ radio.tag }}
+                                <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div> {% endcomment %}
+
+                <div class="form-group">
+                    {{ form.categoria_de_jogo.label_tag }}
+                    <div class="form-error">{{ form.categoria_de_jogo.errors }}</div>
+                    {{ form.categoria_de_jogo }}
+                </div>
+
+                {{ form.password1.label_tag }}<br>
+                {{ form.password1 }}<br>
+                <div class="form-error">{{ form.password1.errors }}</div>
+
+                {{ form.password2.label_tag }}<br>
+                {{ form.password2 }}<br>
+                <div class="form-error">{{ form.password2.errors }}</div>
+                
+                <button type="submit" class="btn-primary">Cadastrar</button>
+                <div class="login-link">
+                    Já tem uma conta?
+                    <a href="{% url 'login' %}">Faça login</a>
+                </div>
+        </div>
+    </main>
+{% endblock  %}
+</body>
+
+</html>

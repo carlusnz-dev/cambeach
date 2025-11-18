@@ -1,0 +1,67 @@
+{% load static %}
+
+<div class="nav-top-row">
+    <a href="/" class="brand-link">
+        <div class="logo-placeholder">
+            <img src="{% static "img/logo_stroked.svg" %}"
+            alt="logo" />
+        </div>
+    </a>
+
+    <button
+        id="mobile-menu-button"
+        class="mobile-menu-button"
+        aria-label="Abrir menu"
+    >
+        <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+</div>
+
+<nav class="nav-links-row">
+    <ul class="nav-desktop-list">
+        <li><a href="/" class="nav-link">Início</a></li>
+        <li>
+            <a href="{% url  'tornament' %}" class="nav-link">Campeonatos</a>
+        </li>
+        {% if  user.is_authenticated%}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
+        {% endif %}
+        <li>
+            <a href="{% url  'organizador' %}" class="nav-link">Organizador</a>
+        </li>
+        <li><a href="suporte" class="nav-link">Suporte</a></li>
+    </ul>
+</nav>
+
+<div id="mobile-menu" class="mobile-menu hidden-menu">
+    <ul class="mobile-menu-list">
+        <li><a href="/">Início</a></li>
+        <li><a href="campeonatos.html">Campeonatos</a></li>
+        {% if  user.is_authenticated%}
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
+        {% endif %}
+        <li><a href="{% url  'organizador' %}">Login Organizador</a></li>
+        <li><a href="suporte.html">Suporte</a></li>
+    </ul>
+</div>
+
+<script>
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden-menu');
+        });
+    } else {
+        console.error('btn not found');
+    }
+</script>

@@ -1,0 +1,54 @@
+{% load static %}<!DOCTYPE html>
+<html lang="pt-br">
+
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CamBeach - Login</title>
+    <link rel="stylesheet" href="{% static 'users/CSS/login.css' %}">
+
+    <head>
+
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <a href="{% url 'inicio'%}" class="logo">CamBeach</a>
+                <a href="{% url 'inicio'%}" class="btn-transparent">Voltar a Início</a>
+                <a href="{% url 'inicio'%}" class="btn-transparent">Voltar a Home</a>
+            </div>
+        </header>
+
+        <main class="login-container">
+            <div class="form-box">
+                <h1>Login</h1>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                    <label for="id_email">Email</label>
+                    <input type="email"  id="id_email" name="username" required>
+                    
+                    <label for="id_senha">Senha</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="id_senha" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Entrar</button>
+                    
+                </form>
+                <p>Não tem conta? <a class="link_cad" href="{% url 'cadastro' %}">Cadastre-se aqui</a></p>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                &copy; 2025 Campeonatos Beach Tennis
+            </div>
+        </footer>
+
+       
+    </body>
+</head>
+
+</html>

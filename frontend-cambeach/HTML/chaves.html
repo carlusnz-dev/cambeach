@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chaves</title>
+  <link rel="stylesheet" href="../CSS/chaves.css">
+</head>
+
+<body>
+
+  
+  <header class="site-header">
+            <div class="container">
+                <a href="/" class="logo">CamBeach</a>
+                <a href="campeonatos.html" class="btn-transparent">Voltar aos Campeonatos</a>
+                
+            </div>
+        </header>
+
+
+  <div class="container">
+    <h1>Chaves do Campeonato</h1>
+    <hr>
+
+    <form method="POST">
+
+
+      <!-- FASE DE GRUPOS -->
+      <h2>Fase de Grupos</h2>
+      <div class="grupos">
+        <div class="bloco-grupo">
+          <h2>Grupo A</h2>
+
+          <div class="partida">
+            <span>Dupla 1A</span>
+            <input type="number" placeholder="Placar" value="">
+            <span>X</span>
+            <input type="number" placeholder="Placar" value="">
+            <span>Dupla 2A</span>
+          </div>
+
+          <div class="partida">
+            <p>Dupla 3A</p>
+            <input type="number" placeholder="Placar" value="">
+            <span>X</span>
+            <input type="number" placeholder="Placar" value="">
+            <span>Dupla 4A</span>
+          </div>
+        </div>
+
+        <div class="bloco-grupo">
+          <h2>Grupo B</h2>
+
+          <div class="partida">
+            <span>Dupla 1B</span>
+            <input type="number" placeholder="Placar" value="">
+            <span>X</span>
+            <input type="number" placeholder="Placar" value="">
+            <span>Dupla 2B</span>
+
+          </div>
+
+          <div class="partida">
+            <span>Dupla 3B</span>
+            <input type="number" placeholder="Placar" value="">
+            <span>X</span>
+            <input type="number" placeholder="Placar" value="">
+            <span>Dupla 4B</span>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!--OITAVAS DE FINAL -->
+      <div class="eliminatoria">
+        <h2>Oitavas de Final</h2>
+        <div class="partida">
+          Dupla 1A <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Dupla 2B
+        </div>
+        <div class="partida">
+          Dupla 4A <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Dupla 1B
+        </div>
+        <div class="partida">
+          Dupla 2A <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Dupla 3B
+        </div>
+        <div class="partida">
+          Dupla 4B <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Dupla 3A
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- QUARTAS DE FINAL -->
+      <div class="eliminatoria">
+        <h2>Quartas de Final</h2>
+        <div class="partida">
+          Vencedor Oitava 1 <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar">
+          Vencedor Oitava 2
+        </div>
+        <div class="partida">
+          Vencedor Oitava 3 <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar">
+          Vencedor Oitava 4
+        </div>
+      </div>
+
+      <hr>
+
+      <!--SEMIFINAL -->
+      <div class="eliminatoria">
+        <h2>Semifinal</h2>
+        <div class="partida">
+          Vencedor QF 1 <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Vencedor QF 2
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- FINAL -->
+      <div class="eliminatoria">
+        <h2>Final</h2>
+        <div class="partida">
+          Vencedor SF 1 <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Vencedor SF 2
+        </div>
+      </div>
+      <h2 class="vencedor"><strong>Vencedores</strong></h2>
+      <p class="vencedor">🏆 🏆</p>
+    </form>
+  </div>
+  <footer>
+    <form method="post">
+      <button type="submit" class="btn-salvar">Salvar resultados</button>
+    </form>
+  </footer>
+</body>
+
+</html>

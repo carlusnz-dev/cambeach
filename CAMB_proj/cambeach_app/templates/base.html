@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}CamBeach{% endblock title %}</title>
+
+        {% load static %} 
+        <link rel="stylesheet" href="{% static "css/style.css" %}"> 
+        
+        {% block extra_css %}{% endblock extra_css %}
+    </head>
+    <body>
+        <header>{% include "includes/navbar.html" %}</header>
+        
+        <main>{% block content %}{% endblock content %}</main>
+    </body>
+</html>

@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    background: white;
+}
+
+.site-header {
+    background: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.site-header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: #003f8a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-transparent {
+    background: transparent;
+    color: #003f8a;
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 2px solid #003f8a;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-transparent:hover {
+    background: #003f8a;
+    color: white;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 20px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+
+.form-box {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 8px 8px rgba(0,0,0,0.1);
+}
+h1 {
+    margin-bottom: 24px;
+    color: #003f8a;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.gen {
+    display: flex;
+    margin-top: 20px;
+}
+
+.cat {
+    display: flex;
+    flex-wrap: wrap; 
+    margin-top: 20px;
+}
+.masc {
+    margin-right: -50px;
+}
+.fem {
+    margin-right: -50px;
+}
+.pass {
+    margin-top: 40px;
+}
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: #003f8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 12px;
+}
+
+.btn-primary:hover {
+    background: #002f6c;
+}
+.login-link {
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.radio-container-horizontal {
+    display: flex;       /* Faz os itens internos (as opções) ficarem lado a lado */
+    flex-wrap: wrap;     /* Se não couber, quebra a linha */
+    gap: 15px;           /* Um espaço entre cada opção (ajuste se quiser) */
+    margin-top: 5px;     /* Um espacinho abaixo do label "Gênero" ou "Categoria" */
+    margin-bottom: 10px; /* Um espaço antes do próximo campo */
+}
+
+.radio-item {
+    display: flex;         /* Faz o <input> (bolinha) e o <label> (texto) ficarem alinhados */
+    align-items: center;   /* Centraliza eles verticalmente */
+}
+
+.radio-item input[type="radio"] {
+    margin-right: 5px;     /* Espaço entre a bolinha e o texto */
+}
+
+.form-error, .form-errors {
+    color: #a94442; /* Um tom de vermelho */
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
