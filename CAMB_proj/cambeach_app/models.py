@@ -12,6 +12,25 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
+class Team(models.Model):
+    name = models.CharField(max_length=255)
+    
+    tournament = models.ForeignKey("Tournament", on_delete=models.CASCADE, related_name="teams")
+    players = models.ManyToManyField("users.Atleta", related_name="teams")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="teams")
+    
+class Match(models.Model):
+    tournament = models.ForeignKey("Tournament", on_delete=models.CASCADE, related_name="matches")
+    category_of_match = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="matches")
+    team_a = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="team_a_matches")
+    team_b = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="team_b_matches")
+    
+    start_time = models.DateTimeField(null=False)
+    end_time = models.DateTimeField(null=False)
+    location = models.CharField(max_length=255)
+    score_team_a = models.SmallIntegerField(null=True, blank=True)
+    score_team_b = models.SmallIntegerField(null=True, blank=True)
+    
 class Tournament(models.Model):
     name = models.CharField(max_length=255)
     local = models.CharField(max_length=255)
@@ -20,8 +39,5 @@ class Tournament(models.Model):
     end_date = models.DateField(null=False)
     n_players = models.SmallIntegerField()
     
-    # User
-    user = models.ForeignKey("users.Atleta", on_delete=models.CASCADE)
-    
     # Category
-    categories = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category, related_name="tournaments")
