@@ -1,1 +1,46 @@
 @import 'style.css';
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px){
+    .nav-top-row {
+        padding: 0 1rem;
+    }
+
+    .bloco {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 20px;
+        transform: translateY(0) !important;
+    }
+
+    .blocos {
+        padding-top: 0;
+    }
+}
+@media (min-width: 768px) {
+    .mobile-menu-button {
+        display: none;
+    }
+    .mobile-menu {
+        display: none !important;
+    }
+    .nav-desktop-list {
+        display: flex;
+    }
+
+    .nav-top-row {
+        justify-content: center;
+        height: auto;
+        padding: 1rem;
+    }
+    .brand-text {
+        display: none;
+    }
+}
