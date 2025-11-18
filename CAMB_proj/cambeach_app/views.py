@@ -59,7 +59,7 @@ def tournament_form(request, pk=None):
     context = {'form': form, 'tournament': tournament}
     return render(request, 'tournament_form.html', context)
 
-def tournament(request):
+def tornament(request):
     return render(request, 'campeonatos.html')
 
 def organizador(request):
