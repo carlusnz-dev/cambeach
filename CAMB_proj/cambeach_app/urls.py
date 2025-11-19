@@ -6,7 +6,8 @@ urlpatterns = [
 
     #campeonato 
     path('tornament/' ,  views.tornament, name='tornament'),
-    path('chaves/', views.chaves, name='chaves'),
+    path('torneio/<int:pk>/chaves/' ,  views.chaves, name='chaves'),
+    path('torneio/<int:pk>/gerar_chaves/' ,  views.gerar_chaves, name='gerar_chaves'),
     path('torneio/create/', views.tournament_form, name='tournament_create'),
     path('torneio/update/<int:pk>/', views.tournament_form, name='tournament_edit'),
 

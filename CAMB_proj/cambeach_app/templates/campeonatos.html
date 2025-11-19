@@ -31,7 +31,7 @@ Campeonatos{% endblock title %}
                 <p>Premiação: R$ 3000</p>
                 <div class="a">
                     <a class="btn primary">Inscrever-se</a>
-                    <a class="btn secondary" href="{%url 'chaves'%}">Ver Chaves</a>
+                    <a class="btn secondary" href="{% url 'chaves' tournament.pk %}">Ver Chaves</a>
                 </div>
             </div>
         </div>

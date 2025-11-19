@@ -1,127 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}CamBeach - Campeonatos{% endblock title %}
-
-
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/chaves.css' %}" />
-{% endblock extra_css %}
-
-
 {% block content %}
-  <div class="container">
-    <h1>Chaves do Campeonato</h1>
+<div class="container">
+    <h1>Chaves: {{ tournament.name }}</h1>
+    
+    {% if not matches %}
+        <a href="{% url 'gerar_chaves' pk=tournament.id %}" class="btn-gerar">Gerar Chaves Automaticamente</a>
+    {% endif %}
+
     <hr>
 
-    <form method="POST">
+    <h2>Jogos Agendados</h2>
+    
+    {% if matches %}
+        <div class="grupos">
+            {% regroup matches by category_of_match as category_list %}
 
-
-      <!-- ==================== FASE DE GRUPOS ==================== -->
-      <h2>Fase de Grupos</h2>
-      <div class="grupos">
-        <div class="bloco-grupo">
-          <h2>Grupo A</h2>
-
-          <div class="partida">
-            <span>Dupla 1A</span>
-            <input type="number" placeholder="Placar" value="">
-            <span>X</span>
-            <input type="number" placeholder="Placar" value="">
-            <span>Dupla 2A</span>
-          </div>
-
-          <div class="partida">
-            <p>Dupla 3A</p>
-            <input type="number" placeholder="Placar" value="">
-            <span>X</span>
-            <input type="number" placeholder="Placar" value="">
-            <span>Dupla 4A</span>
-          </div>
+            {% for category in category_list %}
+                <div class="bloco-categoria">
+                    <h3>Categoria: {{ category.grouper }}</h3>
+                    
+                    {% for match in category.list %}
+                        <div class="partida">
+                            <span class="team-name">{{ match.team_a.name }}</span>
+                            
+                            <input type="number" name="score_a_{{match.id}}" value="{{ match.score_team_a|default_if_none:'' }}" class="placar-input">
+                            <span>X</span>
+                            <input type="number" name="score_b_{{match.id}}" value="{{ match.score_team_b|default_if_none:'' }}" class="placar-input">
+                            
+                            <span class="team-name">{{ match.team_b.name }}</span>
+                            
+                            <small>Local: {{ match.location }} | {{ match.start_time|date:"d/m H:i" }}</small>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
         </div>
-
-        <div class="bloco-grupo">
-          <h2>Grupo B</h2>
-
-          <div class="partida">
-            <span>Dupla 1B</span>
-            <input type="number" placeholder="Placar" value="">
-            <span>X</span>
-            <input type="number" placeholder="Placar" value="">
-            <span>Dupla 2B</span>
-
-          </div>
-
-          <div class="partida">
-            <span>Dupla 3B</span>
-            <input type="number" placeholder="Placar" value="">
-            <span>X</span>
-            <input type="number" placeholder="Placar" value="">
-            <span>Dupla 4B</span>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <!-- ==================== OITAVAS DE FINAL ==================== -->
-      <div class="eliminatoria">
-        <h2>Oitavas de Final</h2>
-        <div class="partida">
-          Dupla 1A <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Dupla 2B
-        </div>
-        <div class="partida">
-          Dupla 4A <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Dupla 1B
-        </div>
-        <div class="partida">
-          Dupla 2A <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Dupla 3B
-        </div>
-        <div class="partida">
-          Dupla 4B <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Dupla 3A
-        </div>
-      </div>
-
-      <hr>
-
-      <!-- ==================== QUARTAS DE FINAL ==================== -->
-      <div class="eliminatoria">
-        <h2>Quartas de Final</h2>
-        <div class="partida">
-          Vencedor Oitava 1 <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar">
-          Vencedor Oitava 2
-        </div>
-        <div class="partida">
-          Vencedor Oitava 3 <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar">
-          Vencedor Oitava 4
-        </div>
-      </div>
-
-      <hr>
-
-      <!-- ==================== SEMIFINAL ==================== -->
-      <div class="eliminatoria">
-        <h2>Semifinal</h2>
-        <div class="partida">
-          Vencedor QF 1 <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Vencedor QF 2
-        </div>
-      </div>
-
-      <hr>
-
-      <!-- ==================== FINAL ==================== -->
-      <div class="eliminatoria">
-        <h2>Final</h2>
-        <div class="partida">
-          Vencedor SF 1 <input type="number" placeholder="Placar"> X <input type="number" placeholder="Placar"> Vencedor SF 2
-        </div>
-      </div>
-      <h2 class="vencedor"><strong>Vencedores</strong></h2>
-      <p class="vencedor">🏆 🏆</p>
-    </form>
-  </div>
-  <footer>
-    <form method="post">
-      <button type="submit" class="btn-salvar">Salvar resultados</button>
-    </form>
-  </footer>
-{% endblock content %}
+    {% else %}
+        <p>Nenhum jogo gerado ainda.</p>
+    {% endif %}
+    
+    </div>
+{% endblock %}
