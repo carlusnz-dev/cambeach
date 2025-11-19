@@ -78,7 +78,11 @@ def tornament(request):
     
     return render(request, 'campeonatos.html', context)
 
-def chaves(request):
+def chaves(request, pk=None):
+    
+    if pk:
+        tournament = get_object_or_404(Tournament, pk=pk)
+    
     return render(request, 'chaves.html')
 
 def organizador(request):
