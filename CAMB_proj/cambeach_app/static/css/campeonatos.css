@@ -76,9 +76,15 @@ a {
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+/* 
+form {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+} */
 
 input {
-    width: 30%;
+    width: 100%;
     padding: 12px;
     border: 1px solid rgb(160, 156, 156);
     border-radius: 6px;

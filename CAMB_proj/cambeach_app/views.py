@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Category, Tournament
 from .forms import CategoryForm, TournamentForm
+from django.db.models import Q
 
 def inicio(request):
     categories = Category.objects.all()
@@ -59,8 +60,26 @@ def tournament_form(request, pk=None):
     context = {'form': form, 'tournament': tournament}
     return render(request, 'tournament_form.html', context)
 
+# Tournement Views
 def tornament(request):
-    return render(request, 'campeonatos.html')
+    
+    tournaments = Tournament.objects.all()
+    query = request.GET.get('pesquisa')
+    if query:
+        tournaments = tournaments.filter(
+            Q(name__icontains=query) |
+            Q(local__icontains=query) |
+            Q(organization__icontains=query)
+        )
+        
+    context = {
+        'tournaments': tournaments
+    }
+    
+    return render(request, 'campeonatos.html', context)
+
+def chaves(request):
+    return render(request, 'chaves.html')
 
 def organizador(request):
     return render(request, 'organizador.html')

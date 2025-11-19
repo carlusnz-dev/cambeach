@@ -7,62 +7,33 @@ Campeonatos{% endblock title %}
 {% endblock extra_css %} 
 
 {% block content %}
-<main>
     <section class="busca" id="hero">
         <h2>Campeonatos Disponíveis</h2>
-        <input
-            type="text"
-            name="pesquisa"
-            id="pesquisa"
-            placeholder="Pesquisar Campeonatos"
-        />
+        <form action="{% url 'tornament' %}" method="GET">
+            <input
+                type="text"
+                name="pesquisa"
+                id="pesquisa"
+                placeholder="Pesquisar Campeonatos"
+            />
+            <button class="btn primary" type="submit">Pesquisar</button>
+        </form>
     </section>
 
-    <div class="container">
-        <div class="box">
-            <h3>Campeonato 1</h3>
-            <p>Data</p>
-            <p>Local</p>
-            <p>Valor da inscrição</p>
-            <p>Premiação</p>
-            <div class="a">
-                <a class="btn primary">Inscrever-se</a>
-                <a class="btn secondary" href="{%url 'chaves'%}">Ver Chaves</a>
+    {% for tournament in tournaments %}
+        <div class="container">
+            <div class="box">
+                <h3>{{ tournament.name }}</h3>
+                <p>{{ tournament.start_date }}</p>
+                <p>{{ tournament.local }}</p>
+                <p>{{ tournament.organization }}</p>
+                <p>{{ tournament.n_players }}</p>
+                <p>Premiação: R$ 3000</p>
+                <div class="a">
+                    <a class="btn primary">Inscrever-se</a>
+                    <a class="btn secondary" href="{%url 'chaves'%}">Ver Chaves</a>
+                </div>
             </div>
         </div>
-        <div class="box">
-            <h3>Campeonato 2</h3>
-            <p>Data</p>
-            <p>Local</p>
-            <p>Valor da inscrição</p>
-            <p>Premiaçao</p>
-            <div class="a">
-                <a class="btn primary">Inscrever-se</a>
-                <a class="btn secondary" href="chaves.html">Ver Chaves</a>
-            </div>
-        </div>
-        <div class="box">
-            <h3>Campeonato 3</h3>
-            <p>Data</p>
-            <p>Local</p>
-            <p>Valor da inscrição</p>
-            <p>Premiação</p>
-            <div class="a">
-                <a class="btn primary">Inscrever-se</a>
-                <a class="btn secondary" href="chaves.html">Ver Chaves</a>
-            </div>
-        </div>
-        <div class="box">
-            <h3>Campeonato 4</h3>
-            <p>Data</p>
-            <p>Local</p>
-            <p>Valor da inscrição</p>
-            <p>Premiação</p>
-            <div class="a">
-                <a class="btn primary">Inscrever-se</a>
-                <a class="btn secondary" href="chaves.html">Ver Chaves</a>
-            </div>
-        </div>
-    </div>
-</main>
+    {% endfor %}
 {% endblock content %}
