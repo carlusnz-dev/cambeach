@@ -90,3 +90,16 @@ def organizador(request):
 
 def create_tournament_page(request):
     return render(request, 'criar_campeonato.html')
+def chaves(request):
+    return render(request, 'chaves.html')
+
+#Organizador 
+def criar_torneio(request):
+    if request.method != 'POST':
+        form = TournamentForm()
+    else: 
+        form = TournamentForm(data=request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return redirect('inicio')
+    return render(request, 'criar_campeonato.html')
