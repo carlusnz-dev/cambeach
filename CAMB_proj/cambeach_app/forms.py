@@ -28,3 +28,7 @@ class TournamentForm(forms.ModelForm):
     class Meta:
         model = Tournament
         fields = ('name', 'local', 'organization', 'start_date', 'end_date', 'n_players', 'categories')
+        
+        widgets = {
+            'categories': forms.CheckboxSelectMultiple(),
+        }
