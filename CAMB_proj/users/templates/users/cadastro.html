@@ -19,6 +19,7 @@
     <main class="login-container">
         <div class="form-box">
             <h1>Cadastro</h1>
+            
             <form action="{% url 'cadastro'%}" method="post">
                 {% csrf_token %}
                 <div class="form-errors">
