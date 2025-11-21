@@ -1,5 +1,4 @@
 from django.db import models
-from cambeach_app.models import Category
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
 class AtletaManager(BaseUserManager):
@@ -42,7 +41,7 @@ class Atleta(AbstractUser):
         blank=False,
     )
         
-    categoria_de_jogo = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True) 
+    categoria_de_jogo = models.ForeignKey('cambeach_app.Category', on_delete=models.SET_NULL, null=True) 
 
     cpf = models.CharField(max_length=14, unique=True)
     telefone = models.CharField(max_length=15, blank=True, null=True)

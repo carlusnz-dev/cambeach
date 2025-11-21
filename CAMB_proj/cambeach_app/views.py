@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Category, Tournament, Team, Match
-from .forms import CategoryForm, TournamentForm
+from .models import Category, Tournament, Team, Match 
+from .forms import CategoryForm, TournamentForm , TeamForm
 from django.db.models import Q
 from random import shuffle
+from users.models import Atleta
+from datetime import datetime, timedelta
 
 def inicio(request):
     categories = Category.objects.all()
@@ -142,6 +144,45 @@ def create_tournament_page(request):
 
 
 def chaves(request):
-    return render(request, 'chaves.html')
+    tournament = get_object_or_404(Tournament, pk=pk)
+    
+    # Busca todos os times desse torneio
+    # O select_related/prefetch_related deixa o carregamento muito mais rápido
+    teams = Team.objects.filter(tournament=tournament).order_by('category', 'id').prefetch_related('players')
+    
+    # Busca as partidas (se já tiverem sido geradas)
+    matches =Match.objects.filter(tournament=tournament).order_by('category_of_match', 'id')
+
+    context ={
+        'tournament': tournament,
+        'teams': teams,
+        'matches': matches
+    }
+    return render(request, 'chaves.html' , context)
 
 #Organizador 
+
+@login_required
+def inscrever(request, tournament_id):
+    torneio = get_object_or_404(Tournament, pk=tournament_id)
+    
+    if request.method == 'POST':
+
+        form = TeamForm(request.POST , tournament=torneio , user=request.user)
+
+        if form.is_valid():
+            novo_time = form.save(commit=False)
+            
+            novo_time.tournament = torneio
+            novo_time.save() 
+            novo_time.players.add(request.user)
+            
+            parceiro = form.cleaned_data['parceiro_obj']
+
+            novo_time.players.add(parceiro)
+            
+            return redirect('detalhes_torneio', pk=torneio.pk)
+    else:
+        form = TeamForm(tournament=torneio , user=request.user)
+    
+    return render(request, 'inscrever.html', {'form': form, 'torneio': torneio})

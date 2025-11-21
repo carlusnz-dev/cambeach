@@ -12,13 +12,28 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
+class TournamentDivision(models.Model):
+    tournament = models.ForeignKey("Tournament", on_delete=models.CASCADE, related_name="divisions")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="divisions")
+
+    max_teams = models.SmallIntegerField(default=16 , verbose_name="Maximo de duplas")
+
+
+
 class Team(models.Model):
-    name = models.CharField(max_length=255)
-    
+
+    name = models.CharField(max_length=50 , verbose_name="Nome da Dupla" , null=True ,blank=True)    
     tournament = models.ForeignKey("Tournament", on_delete=models.CASCADE, related_name="teams")
     players = models.ManyToManyField("users.Atleta", related_name="teams")
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="teams")
-    
+
+    def __str__(self):
+        nomes = [atleta.first_name for atleta in self.players.all()]
+        if self.name:
+            return f"{self.name} ({' & '.join(nomes)})"
+        return " & ".join(nomes)
+
 class Match(models.Model):
     tournament = models.ForeignKey("Tournament", on_delete=models.CASCADE, related_name="matches")
     category_of_match = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="matches")
