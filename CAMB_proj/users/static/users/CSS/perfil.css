@@ -1,0 +1,243 @@
+/* Layout Principal: Grid de duas colunas */
+.profile-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr; /* Lateral menor, Principal maior */
+    gap: 25px;
+    align-items: start;
+}
+
+/* Design dos Cards (Blocos Brancos) */
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #eee;
+}
+
+.card-title {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--primary-color); /* Usa sua cor azul */
+    font-size: 1.2rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+/* --- Sidebar: Usuário --- */
+.user-card {
+    text-align: center;
+}
+
+.avatar-circle {
+    width: 90px;
+    height: 90px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin: 0 auto 15px auto;
+}
+
+.user-name {
+    margin: 10px 0 5px;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.badge-category {
+    background-color: #eee;
+    color: #555;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.user-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.stat-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #777;
+    text-transform: uppercase;
+}
+
+/* --- Sidebar: Lista de Duplas --- */
+.team-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.team-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.team-item:last-child {
+    border-bottom: none;
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.tournament-name {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.team-partner {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.category-tag {
+    font-size: 0.75rem;
+    background: #eef2ff;
+    color: var(--primary-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* --- Área Principal: Cards de Jogos --- */
+.match-list {
+    display: grid;
+    gap: 15px;
+}
+
+.match-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    background: #fafafa;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.match-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #fff;
+    border-color: var(--primary-color);
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.match-versus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.my-team {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.vs {
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+}
+
+/* --- Área Principal: Tabela de Histórico --- */
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th {
+    text-align: left;
+    color: #777;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.history-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+    color: #444;
+}
+
+.score {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.status-win {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.status-loss {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.empty-msg {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Responsividade para Celular */
+@media (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: 1fr; /* Vira uma coluna só */
+    }
+    
+    .match-versus {
+        flex-direction: column;
+        gap: 5px;
+    }
+}

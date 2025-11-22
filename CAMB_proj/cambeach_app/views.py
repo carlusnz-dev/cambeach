@@ -149,7 +149,6 @@ def inscrever(request, tournament_id):
     
     return render(request, 'inscrever.html', {'form': form, 'torneio': torneio})
 
-
 # Debug
 def random_string(length=5):
     letters = string.ascii_lowercase

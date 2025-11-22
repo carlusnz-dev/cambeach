@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Meu Perfil | CamBeach{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'users/CSS/perfil.css' %}" />
+{% endblock extra_css %}
+
+{% block content %}
+<div class="profile-container">
+    
+    <aside class="profile-sidebar">
+        
+        <div class="card user-card">
+            <div class="avatar-circle">
+                {{ user.first_name|first|default:"U" }}{{ user.last_name|first|default:"" }}
+            </div>
+            <h2 class="user-name">{{ user.get_full_name|default:user.username }}</h2>
+            
+            {% if user.categoria_de_jogo %}
+                <span class="badge-category">{{ user.categoria_de_jogo.name }}</span>
+            {% else %}
+                <span class="badge-category">Sem Categoria</span>
+            {% endif %}
+
+            <div class="user-stats">
+                <div class="stat-box">
+                    <span class="stat-number">{{ total_jogos }}</span>
+                    <span class="stat-label">Jogos</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">{{ total_vitorias }}</span>
+                    <span class="stat-label">Vitórias</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">Minhas Duplas Ativas</h3>
+            <ul class="team-list">
+                {% for team in my_teams %}
+                    <li class="team-item">
+                        <div class="team-info">
+                            <span class="tournament-name">{{ team.tournament.name }}</span>
+                            <span class="team-partner">
+                                Com: 
+                                {% for player in team.players.all %}
+                                    {% if player != user %}
+                                        <strong>{{ player.first_name }}</strong>
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                        </div>
+                        <span class="category-tag">{{ team.category.name }}</span>
+                    </li>
+                {% empty %}
+                    <li class="empty-msg">Você não está inscrito em nenhum torneio no momento.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </aside>
+
+    <main class="profile-main">
+        
+        <div class="card">
+            <h3 class="card-title">Próximas Partidas</h3>
+            
+            {% if upcoming_matches %}
+                <div class="match-list">
+                    {% for match in upcoming_matches %}
+                        <div class="match-card">
+                            <div class="match-header">
+                                <span class="match-date">{{ match.start_time|date:"d/m - H:i" }}</span>
+                                <span class="match-local">{{ match.location }}</span>
+                            </div>
+                            <div class="match-versus">
+                                {% if user in match.team_a.players.all %}
+                                    <span class="my-team">{{ match.team_a.name|default:"Sua Dupla" }}</span>
+                                    <span class="vs">vs</span>
+                                    <span class="opponent">{{ match.team_b.name|default:"A Definir" }}</span>
+                                {% else %}
+                                    <span class="my-team">{{ match.team_b.name|default:"Sua Dupla" }}</span>
+                                    <span class="vs">vs</span>
+                                    <span class="opponent">{{ match.team_a.name|default:"A Definir" }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="empty-msg">Nenhuma partida agendada. Aguarde o chaveamento.</p>
+            {% endif %}
+        </div>
+
+        <div class="card">
+            <h3 class="card-title">Histórico</h3>
+            
+            {% if history_matches %}
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Torneio</th>
+                            <th>Placar</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for match in history_matches %}
+                        <tr>
+                            <td>{{ match.start_time|date:"d/m" }}</td>
+                            <td>{{ match.tournament.name }}</td>
+                            <td class="score">
+                                {{ match.score_team_a }} x {{ match.score_team_b }}
+                            </td>
+                            <td>
+                                {% if user in match.team_a.players.all %}
+                                    {% if match.score_team_a > match.score_team_b %}
+                                        <span class="status-win">Vitória</span>
+                                    {% else %}
+                                        <span class="status-loss">Derrota</span>
+                                    {% endif %}
+                                {% else %}
+                                    {% if match.score_team_b > match.score_team_a %}
+                                        <span class="status-win">Vitória</span>
+                                    {% else %}
+                                        <span class="status-loss">Derrota</span>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="empty-msg">Nenhum histórico de partidas finalizadas.</p>
+            {% endif %}
+        </div>
+    </main>
+</div>
+{% endblock content %}

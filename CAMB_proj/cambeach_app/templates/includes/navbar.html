@@ -3,8 +3,7 @@
 <div class="nav-top-row">
     <a href="/" class="brand-link">
         <div class="logo-placeholder">
-            <img src="{% static "img/logo_stroked.svg" %}"
-            alt="logo" />
+            <img src="{% static 'img/logo_stroked.svg' %}" alt="logo" />
         </div>
     </a>
 
@@ -23,17 +22,20 @@
 
 <nav class="nav-links-row">
     <ul class="nav-desktop-list">
-        <li><a href="/" class="nav-link">Início</a></li>
+        <li><a href="{% url 'inicio' %}" class="nav-link">Início</a></li>
         <li>
-            <a href="{% url  'tornament' %}" class="nav-link">Campeonatos</a>
+            <a href="{% url 'tornament' %}" class="nav-link">Campeonatos</a>
         </li>
-        {% if  user.is_authenticated%}
-          <li><a href="{% url 'logout' %}">Logout</a></li>
+        
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'perfil' %}" class="nav-link" style="font-weight: bold;">Meu Perfil</a></li>
+            <li><a href="{% url 'logout' %}" class="nav-link">Sair</a></li>
         {% else %}
-          <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
+            <li><a href="{% url 'login' %}" class="nav-link">Login/Cadastro</a></li>
         {% endif %}
+        
         <li>
-            <a href="{% url  'organizador' %}" class="nav-link">Organizador</a>
+            <a href="{% url 'organizador' %}" class="nav-link">Organizador</a>
         </li>
         <li><a href="suporte" class="nav-link">Suporte</a></li>
     </ul>
@@ -41,15 +43,18 @@
 
 <div id="mobile-menu" class="mobile-menu hidden-menu">
     <ul class="mobile-menu-list">
-        <li><a href="/">Início</a></li>
-        <li><a href="campeonatos.html">Campeonatos</a></li>
-        {% if  user.is_authenticated%}
-          <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="{% url 'inicio' %}">Início</a></li>
+        <li><a href="{% url 'tornament' %}">Campeonatos</a></li>
+        
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'perfil' %}" style="font-weight: bold;">Meu Perfil</a></li>
+            <li><a href="{% url 'logout' %}">Sair</a></li>
         {% else %}
-          <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
+            <li><a href="{% url 'login' %}">Login/Cadastro</a></li>
         {% endif %}
-        <li><a href="{% url  'organizador' %}">Login Organizador</a></li>
-        <li><a href="suporte.html">Suporte</a></li>
+        
+        <li><a href="{% url 'organizador' %}">Área do Organizador</a></li>
+        <li><a href="#">Suporte</a></li>
     </ul>
 </div>
 
@@ -61,7 +66,5 @@
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden-menu');
         });
-    } else {
-        console.error('btn not found');
     }
 </script>
