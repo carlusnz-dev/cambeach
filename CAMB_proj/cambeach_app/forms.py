@@ -1,14 +1,12 @@
 from django import forms
-from .models import Category, Tournament , Team 
-from django.core.exceptions import ValidationError 
-from users.models import Atleta 
+from django.core.exceptions import ValidationError
+from .models import Category, Tournament, Team
+from users.models import Atleta
 
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ("name", "genre")
-        
-        
 
 class TeamForm(forms.ModelForm):
     cpf_parceiro = forms.CharField(label="CPF da Dupla", max_length=14)
@@ -38,7 +36,6 @@ class TeamForm(forms.ModelForm):
                 tournament=self.tournament, 
                 players=self.user
             ).exists()
-            
             if ja_inscrito:
                 raise ValidationError("Erro: VOCÊ já está inscrito em um time neste torneio.")
 
@@ -47,7 +44,6 @@ class TeamForm(forms.ModelForm):
                 tournament=self.tournament, 
                 players=parceiro
             ).exists()
-            
             if parceiro_ja_inscrito:
                 raise ValidationError(f"Erro: O atleta {parceiro.first_name} já está inscrito neste torneio com outra dupla.")
         
@@ -55,16 +51,13 @@ class TeamForm(forms.ModelForm):
              raise ValidationError("Você não pode formar dupla com você mesmo.")
 
         return cleaned_data
-    
 
 class TournamentForm(forms.ModelForm):
-
     categories = forms.ModelMultipleChoiceField(
         label="Categorias",
         widget=forms.CheckboxSelectMultiple,
         queryset=None 
     )
-
     name = forms.CharField(label="Nome do Campeonato", max_length=255)
     local = forms.CharField(label="Local", max_length=255)
     organization = forms.CharField(label="Organização", max_length=255)
@@ -77,6 +70,7 @@ class TournamentForm(forms.ModelForm):
         label="Data de Encerramento",
         widget=forms.DateInput(attrs={'type': 'date'})
     )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['categories'].queryset = Category.objects.all()

@@ -1,7 +1,8 @@
 {% extends 'base.html' %} 
 {% load static %} 
-{% block title %}CamBeach -
-Campeonatos{% endblock title %} 
+
+{% block title %}CamBeach - Campeonatos{% endblock title %} 
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/campeonatos.css' %}" />
 {% endblock extra_css %} 
@@ -30,7 +31,7 @@ Campeonatos{% endblock title %}
                 <p>{{ tournament.n_players }}</p>
                 <p>Premiação: R$ 3000</p>
                 <div class="a">
-                    <a class="btn primary"href="{% url 'inscrever' tournament_id=tournament.id%}" >Inscrever-se</a>
+                    <a class="btn primary" href="{% url 'inscrever' tournament_id=tournament.id %}">Inscrever-se</a>
                     <a class="btn secondary" href="{% url 'chaves' tournament.pk %}">Ver Chaves</a>
                 </div>
             </div>
