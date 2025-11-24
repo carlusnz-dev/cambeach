@@ -35,11 +35,15 @@ class Team(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="teams")
 
     def __str__(self):
-        nomes = [atleta.first_name for atleta in self.players.all()]
-        if self.name:
-            return f"{self.name} ({' & '.join(nomes)})"
-        return " & ".join(nomes)
-
+        if self.pk:
+            try:
+                nomes = list(self.players.values_list('first_name', flat=True))
+                if nomes:
+                    return " / ".join(nomes)
+            except Exception:
+                pass
+        
+        return f"Time {self.pk} (Em formação)"
 class Match(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="matches")
     category_of_match = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="matches")
