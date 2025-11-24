@@ -209,3 +209,6 @@ def debug_popular_times(request, pk):
             team.players.add(atleta1, atleta2)
 
     return redirect('chaves', pk=tournament.pk)
+
+def suporte(request):
+    return render('suporte', 'suporte.html')
