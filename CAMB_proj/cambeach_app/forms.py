@@ -3,6 +3,11 @@ from django.core.exceptions import ValidationError
 from .models import Category, Tournament, Team
 from users.models import Atleta
 
+class CategoryMultipleChoiceField(forms.ModelMultipleChoiceField):
+    def label_from_instance(self, obj):
+        return f"{obj.name} - {obj.get_genre_display()}"
+
+
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
@@ -53,7 +58,7 @@ class TeamForm(forms.ModelForm):
         return cleaned_data
 
 class TournamentForm(forms.ModelForm):
-    categories = forms.ModelMultipleChoiceField(
+    categories = CategoryMultipleChoiceField(
         label="Categorias",
         widget=forms.CheckboxSelectMultiple,
         queryset=None 
@@ -73,7 +78,7 @@ class TournamentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['categories'].queryset = Category.objects.all()
+        self.fields['categories'].queryset = Category.objects.all() 
 
     class Meta:
         model = Tournament
