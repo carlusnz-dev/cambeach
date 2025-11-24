@@ -7,6 +7,11 @@ class CategoryMultipleChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, obj):
         return f"{obj.name} - {obj.get_genre_display()}"
 
+class CategoryChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return f"{obj.name} - {obj.get_genre_display()}"
+
+
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
@@ -14,6 +19,13 @@ class CategoryForm(forms.ModelForm):
 
 class TeamForm(forms.ModelForm):
     cpf_parceiro = forms.CharField(label="CPF da Dupla", max_length=14)
+
+    category = CategoryChoiceField(
+        queryset=Category.objects.none(),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+        label="Categoria Disponivel",
+        empty_label="Categoria Indisponivel",
+    )
 
     class Meta:
         model = Team
@@ -23,6 +35,15 @@ class TeamForm(forms.ModelForm):
         self.tournament = kwargs.pop('tournament', None)
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
+        
+        
+        if self.tournament:
+            qs = self.tournament.categories.all()
+            
+            if self.user and self.user.categoria_de_jogo:
+                qs = qs.filter(id=self.user.categoria_de_jogo.id)
+            
+            self.fields['category'].queryset = qs
 
     def clean(self):
         cleaned_data = super().clean()

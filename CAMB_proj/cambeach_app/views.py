@@ -187,10 +187,12 @@ def inscrever(request, tournament_id):
         if form.is_valid():
             novo_time = form.save(commit=False)
             novo_time.tournament = torneio
-            novo_time.save() 
-            novo_time.players.add(request.user)
             parceiro = form.cleaned_data['parceiro_obj']
+            novo_time.name = f"Dupla {request.user.first_name} & {parceiro.first_name}"
+            novo_time.save()
+            novo_time.players.add(request.user)
             novo_time.players.add(parceiro)
+            
             return redirect('chaves', pk=torneio.pk)
     else:
         form = TeamForm(tournament=torneio, user=request.user)

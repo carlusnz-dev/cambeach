@@ -31,15 +31,15 @@ class Atleta(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [] 
     
-    class Genero(models.TextChoices):
-        MASCULINO = 'M', 'Masculino'
-        FEMININO = 'F', 'Feminino'  
+    # class Genero(models.TextChoices): # Use um nome único para a classe
+    #     MASCULINO = 'M', 'Masculino'
+    #     FEMININO = 'F', 'Feminino'  
         
-    genero = models.CharField(
-        max_length=1,
-        choices=Genero.choices,
-        blank=False,
-    )
+    # genero = models.CharField(
+    #     max_length=1,
+    #     choices=Genero.choices,
+    #     blank=False,
+    # )
         
     categoria_de_jogo = models.ForeignKey('cambeach_app.Category', on_delete=models.SET_NULL, null=True) 
 
