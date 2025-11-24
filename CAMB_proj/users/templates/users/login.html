@@ -14,7 +14,6 @@
             <div class="container">
                 <a href="{% url 'inicio'%}" class="logo">CamBeach</a>
                 <a href="{% url 'inicio'%}" class="btn-transparent">Voltar a Início</a>
-                <a href="{% url 'inicio'%}" class="btn-transparent">Voltar a Home</a>
             </div>
         </header>
 
@@ -23,9 +22,11 @@
                 <h1>Login</h1>
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}
+                    {% if form.errors%}
                     <div class="form-errors">
                         {{ form.non_field_errors }}
                     </div>
+                    {% endif %}
                     <label for="id_email">Email</label>
                     <input type="email"  id="id_email" name="username" required>
                     

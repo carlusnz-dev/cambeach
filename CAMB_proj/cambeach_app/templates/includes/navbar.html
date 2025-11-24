@@ -37,7 +37,7 @@
         <li>
             <a href="{% url 'organizador' %}" class="nav-link">Organizador</a>
         </li>
-        <li><a href="suporte" class="nav-link">Suporte</a></li>
+        <li><a href="{% url 'suporte' %}" class="nav-link">Suporte</a></li>
     </ul>
 </nav>
 
@@ -54,7 +54,7 @@
         {% endif %}
         
         <li><a href="{% url 'organizador' %}">Área do Organizador</a></li>
-        <li><a href="#">Suporte</a></li>
+        <li><a href="{% url 'suporte' %}">Suporte</a></li>
     </ul>
 </div>
 

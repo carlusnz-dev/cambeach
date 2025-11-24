@@ -20,6 +20,7 @@ urlpatterns = [
     path('category/create/', views.category_form, name='category_create'),
     path('category/update/<int:pk>/', views.category_form, name='category_update'),
     path('category/delete/<int:pk>/', views.category_delete, name='category_delete'),
+    path('suporte/', views.suporte, name='suporte'),
     
     # Debug
     path('torneio/<int:pk>/debug-popular/', views.debug_popular_times, name='debug_popular'),

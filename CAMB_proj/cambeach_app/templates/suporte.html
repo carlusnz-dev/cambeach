@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static "css/suporte.css" %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<main>
+    <div class="suporte-container">
+        <h1>Suporte</h1>
+        <p class="descricao">Estamos aqui para ajudar! Envie sua dúvida ou veja as perguntas mais frequentes.</p>
+
+        <div class="suporte-conteudo">
+            <div class="faq">
+                <h2>Perguntas Frequentes</h2>
+
+                <div class="faq-item">
+                    <h3>Como faço cadastro?</h3>
+                    <p>Basta ir até a tela de cadastro, preencher seus dados e clicar em "Criar conta".</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Esqueci minha senha, e agora?</h3>
+                    <p>Use a opção “Recuperar senha” na tela de login.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Onde vejo minhas informações?</h3>
+                    <p>No menu do usuário, clique em "Perfil".</p>
+                </div>
+            </div>
+
+            <div class="formulario-suporte">
+                <h2>Fale com o Suporte</h2>
+
+                <form>
+                    <label>Nome</label>
+                    <input type="text" placeholder="Seu nome">
+
+                    <label>Email</label>
+                    <input type="email" placeholder="Seu email">
+
+                    <label>Mensagem</label>
+                    <input placeholder="Digite sua mensagem"></input>
+                    <button>Enviar</button>
+                </form>
+
+            <p class="info-contato">
+                Ou entre em contato diretamente:<br>
+                📧 suporte@seudominio.com<br>
+                📞 (11) 99999-9999<br>
+                🕒 Atendimento: 08h–18h
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock content %} 
