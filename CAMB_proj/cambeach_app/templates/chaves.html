@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Chaves do Torneio | CamBeach{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/chaves.css' %}" />
+{% endblock extra_css %}
+
 {% block content %}
 <div class="container">
     <h1>Chaves: {{ tournament.name }}</h1>
@@ -11,34 +17,80 @@
 
     <hr>
 
+    <h2>Informações do Torneio</h2>
+    <div>
+        <p><strong>Local:</strong> {{ tournament.local }}</p>
+        <p><strong>Organização:</strong> {{ tournament.organization }}</p>
+        <p><strong>Período:</strong> {{ tournament.start_date|date:"d/m/Y" }} a {{ tournament.end_date|date:"d/m/Y" }}</p>
+    </div>
+
+    <h2>Categorias do Torneio</h2>
+    <ul>
+        {% for division in tournament.divisions.all %}
+            <li>
+                {{ division.category.name }} - {{ division.category.get_genre_display }} 
+                <small>(Máximo de Duplas: {{ division.max_teams }})</small>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
     <h2>Jogos Agendados</h2>
     
-    {% if matches %}
+    {% if groups %}
         <div class="grupos">
-            {% regroup matches by category_of_match as category_list %}
-
-            {% for category in category_list %}
+            
+            {% for group in groups %}
+                {# O loop principal agora itera pelos grupos passados pela view #}
                 <div class="bloco-categoria">
-                    <h3>Categoria: {{ category.grouper }}</h3>
                     
-                    {% for match in category.list %}
-                        <div class="partida">
-                            <span class="team-name">{{ match.team_a.name }}</span>
-                            
-                            <input type="number" name="score_a_{{match.id}}" value="{{ match.score_team_a|default_if_none:'' }}" class="placar-input">
-                            <span>X</span>
-                            <input type="number" name="score_b_{{match.id}}" value="{{ match.score_team_b|default_if_none:'' }}" class="placar-input">
-                            
-                            <span class="team-name">{{ match.team_b.name }}</span>
-                            
-                            <small>Local: {{ match.location }} | {{ match.start_time|date:"d/m H:i" }}</small>
-                        </div>
-                    {% endfor %}
+                    <h3>Categoria: {{ group.category.name }}</h3>
+                    <h4>{{ group.name }}</h4>
+                    
+                    <table class="tabela-jogos">
+                        <thead>
+                            <tr>
+                                <th>Horário</th>
+                                <th>Time 1</th>
+                                <th>Time 2</th>
+                                <th>Placar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {# Itera pelas partidas ligadas diretamente ao grupo #}
+                            {% for match in group.matches_in_group.all %}
+                                <tr>
+                                    {# Data e Hora #}
+                                    <td>{{ match.start_time|date:"d/m H:i" }}</td>
+                                    
+                                    {# Jogadores (Time A) #}
+                                    <td><strong>{{ match.team_a.name }}</strong></td>
+                                    
+                                    {# Jogadores (Time B) #}
+                                    <td><strong>{{ match.team_b.name }}</strong></td>
+                                    
+                                    {# Placar #}
+                                    <td class="placar-cell">
+                                        {% if match.score_team_a is not None or match.score_team_b is not None %}
+                                            <span class="score-display">{{ match.score_team_a|default_if_none:'' }}</span>
+                                            <span>X</span>
+                                            <span class="score-display">{{ match.score_team_b|default_if_none:'' }}</span>
+                                        {% else %}
+                                            Aguardando
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
                 </div>
             {% endfor %}
+            
         </div>
     {% else %}
-        <p>Nenhum jogo gerado ainda.</p>
+        <p>Nenhum grupo ou jogo gerado ainda. Clique em "Gerar Chaves Automaticamente" para iniciar.</p>
     {% endif %}
 </div>
 {% endblock %}

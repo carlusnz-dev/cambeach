@@ -31,7 +31,7 @@ class Atleta(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [] 
     
-    class Genero(models.TextChoices): # Use um nome único para a classe
+    class Genero(models.TextChoices):
         MASCULINO = 'M', 'Masculino'
         FEMININO = 'F', 'Feminino'  
         

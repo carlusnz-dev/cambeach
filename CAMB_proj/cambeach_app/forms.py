@@ -7,7 +7,6 @@ class CategoryMultipleChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, obj):
         return f"{obj.name} - {obj.get_genre_display()}"
 
-
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
@@ -79,6 +78,17 @@ class TournamentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['categories'].queryset = Category.objects.all() 
+        
+    def clean(self):
+        cleaned_data = super().clean()
+        start_date = cleaned_data.get('start_date')
+        end_date = cleaned_data.get('end_date')
+        n_players = cleaned_data.get('n_players')
+        
+        if start_date and end_date and start_date > end_date:
+            self.add_error('start_date', 'Data de início maior que data final')
+        
+        return cleaned_data
 
     class Meta:
         model = Tournament

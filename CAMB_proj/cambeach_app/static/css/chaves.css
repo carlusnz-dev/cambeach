@@ -1,152 +1,154 @@
-
-
-body {
-  font-family: "Arial";
-  background: #f8f8f8;
-  margin: 0;
-}
-:root {
-    --azul-claro: #a5d8ff;
-    --azul-escuro: #003f8a;
-    --branco: #ffffff;
-    --cinza-claro: #f4f6f8;
-}
-
-.site-header {
-    background: var(--branco);
-    padding: 20px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.site-header .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.logo {
-    font-size: 1.5rem;
-    color: var(--azul-escuro);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.btn-transparent {
-    background: transparent;
-    color: var(--azul-escuro);
-    text-decoration: none;
-    padding: 8px 16px;
-    border: 2px solid var(--azul-escuro);
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.btn-transparent:hover {
-    background: var(--azul-escuro);
-    color: var(--branco);
-}
-
-
 .container {
-  width: 90%;
-  margin: 30px auto;
+    max-width: 1200px; /* Aumentado para melhor distribuição */
+    margin: 40px auto;
+    padding: 0 25px;
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #003f8a;
+    text-align: center;
+    color: var(--azul-escuro);
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 800;
 }
 
 h2 {
-  color: #003f8a;
-  text-align: center;
+    color: var(--azul-escuro);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    padding-left: 10px;
+    border-left: 4px solid var(--azul-claro); /* Detalhe visual */
 }
 
-.bloco-grupo {
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 50px;
-  margin-top: 50px;
-  width: 400px;
-  margin-left: 70px;
-  margin-right: 70px;
-
-}
-
+/* --- Estrutura de Categorias e Grupos (Flexbox) --- */
 .grupos {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px; /* Mais espaço entre os blocos (melhor separação) */
+    margin-top: 30px;
 }
 
-
-.eliminatoria {
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 50px;
-  margin-top: 50px;
-  width: 700px;
-  text-align: center;
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+.bloco-categoria {
+    background: var(--branco);
+    border: none; /* Removendo borda fina, confiando na sombra */
+    box-shadow: var(--sombra-padrao);
+    padding: 25px;
+    border-radius: 12px;
+    width: 100%; 
+    max-width: 550px; /* Aumentado para dar mais espaço à tabela */
+    transition: box-shadow 0.3s ease;
 }
 
-
-
-.partida {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 0;
+.bloco-categoria:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra mais intensa no hover */
 }
 
-input[type="number"] {
-  width: 50px;
-  text-align: center;
+h3 { 
+    color: var(--azul-escuro);
+    font-size: 1.4rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--azul-claro);
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: left; /* Alinha à esquerda dentro do bloco */
 }
 
-.vencedor {
-  text-align: center;
-  margin-top: 50px;
+h4 { 
+    color: var(--cinza-texto);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-align: left; /* Alinha à esquerda */
+    font-weight: bold;
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
-  right: 20px;
+/* --- Tabela de Jogos (Melhor Legibilidade) --- */
+.tabela-jogos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
 }
 
-button {
-  display: flex;
-  margin: 40px auto;
-  padding: 20px 20px;
-  background: #003f8a;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-
+.tabela-jogos th {
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    padding: 10px 5px;
+    text-align: center;
+    border-bottom: 2px solid var(--azul-claro);
+    font-weight: 600;
 }
 
-button:hover {
-  background: #002f6c;
+.tabela-jogos td {
+    padding: 12px 5px; /* Mais padding vertical */
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
 }
 
-input::-webkit-inner-spin-button,
-input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 0;
+.tabela-jogos tbody tr:nth-child(even) {
+    background-color: var(--cinza-fundo); /* Zebra striping para melhor leitura */
+}
+
+.tabela-jogos tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.placar-cell {
+    font-weight: bold;
+    color: var(--azul-escuro);
+}
+
+.placar-cell .score-display {
+    padding: 0 5px;
+    font-size: 1rem;
+}
+
+/* --- Informações do Torneio (Melhoria Visual) --- */
+.container > div:nth-child(4), 
+.container > div:nth-child(5) {
+    background: var(--branco);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: var(--sombra-leve);
+}
+
+.container > div:nth-child(5) ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container > div:nth-child(5) ul li {
+    padding: 8px 0;
+    color: var(--cinza-texto);
+}
+
+/* --- Responsividade (Otimizada) --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 0 15px;
+    }
+    
+    .grupos {
+        gap: 25px;
+    }
+    
+    .bloco-categoria {
+        max-width: 100%; 
+        padding: 15px;
+    }
+    
+    .tabela-jogos {
+        font-size: 0.8rem;
+    }
+    
+    /* Oculta data/hora em telas menores para dar foco aos times */
+    .tabela-jogos th:nth-child(1),
+    .tabela-jogos td:nth-child(1) {
+        display: none;
+    }
 }

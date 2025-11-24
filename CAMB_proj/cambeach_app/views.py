@@ -1,18 +1,17 @@
 from datetime import datetime, timedelta
-from random import shuffle
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.db.models import Q
-from .models import Category, Tournament, Team, Match
+from .models import Category, Tournament, Team, Match, TournamentDivision
 from .forms import CategoryForm, TournamentForm, TeamForm
 import random
 import string
 
 def inicio(request):
-    categories = Category.objects.all()
+    tournaments = Tournament.objects.all()
     context = {
-        'categories': categories
+        'tournaments': tournaments
     }
     return render(request, 'inicio.html', context)
 
@@ -38,23 +37,30 @@ def category_delete(request, pk):
     return redirect('inicio')
 
 @login_required
-def tournament_form(request, pk=None):
+def create_tournament_page(request, pk=None):
     tournament = None
     if pk:
         tournament = get_object_or_404(Tournament, pk=pk)
     
     if request.method == 'POST':
         form = TournamentForm(request.POST, instance=tournament)
+        
         if form.is_valid():
             tournament = form.save(commit=False)
+            data = form.cleaned_data['categories']
             form.save()
-            form.save_m2m()
-            return redirect('tournament_create')
+            
+            for i in data:
+                tournament_division = tournament.divisions.filter(category=i).first()
+                if not tournament_division:
+                    tournament.divisions.create(category=i, max_teams=16)
+            
+            return redirect('create_tournament_page')
     else:
         form = TournamentForm(instance=tournament)
         
     context = {'form': form, 'tournament': tournament}
-    return render(request, 'tournament_form.html', context)
+    return render(request, 'criar_campeonato.html', context)
 
 def tornament(request):
     tournaments = Tournament.objects.all()
@@ -70,29 +76,50 @@ def tornament(request):
     }
     return render(request, 'campeonatos.html', context)
 
-def chaves(request, pk):
-    tournament = get_object_or_404(Tournament, pk=pk)
-    teams = Team.objects.filter(tournament=tournament).order_by('category', 'id').prefetch_related('players')
-    matches = Match.objects.filter(tournament=tournament).order_by('category_of_match', 'id')
-
-    context = {
-        'tournament': tournament,
-        'teams': teams,
-        'matches': matches
-    }
-    return render(request, 'chaves.html', context)
-
 @login_required
 def gerar_chaves(request, pk):
+    from datetime import datetime, timedelta
+    import random
+    from django.shortcuts import get_object_or_404, redirect
+    from .models import Tournament, Team, Match, TournamentDivision, Category, Group, Q # Q deve ser importado
+    from django.db.models import Q
+
     tournament = get_object_or_404(Tournament, pk=pk)
     
+    max_teams_per_category = {}
+    divisions = TournamentDivision.objects.filter(tournament=tournament)
+    for division in divisions:
+        max_teams_per_category[division.category.id] = division.max_teams
+    
+    group_counter = {}
+
     for category in tournament.categories.all():
-        teams = list(Team.objects.filter(tournament=tournament, category=category))
-        shuffle(teams)
+        limit = max_teams_per_category.get(category.id, 16)
+        teams_all = list(Team.objects.filter(tournament=tournament, category=category))
+        
+        for t in teams_all:
+            t.sort_key = random.random()
+        teams_all.sort(key=lambda x: x.sort_key)
+        
+        teams = teams_all[:limit]
+        
+        group_counter[category.id] = 1 
         
         for i in range(0, len(teams), 5):
             grupo_atual = teams[i : i + 5]
             
+            group_name = f"Grupo {group_counter[category.id]}"
+            
+            group_obj, created = Group.objects.get_or_create(
+                tournament=tournament,
+                category=category,
+                name=group_name,
+            )
+            
+            group_obj.teams.set(grupo_atual)
+            
+            group_counter[category.id] += 1
+
             for idx_a in range(len(grupo_atual)):
                 for idx_b in range(idx_a + 1, len(grupo_atual)):
                     time_a = grupo_atual[idx_a]
@@ -101,34 +128,55 @@ def gerar_chaves(request, pk):
                     partida_existente = Match.objects.filter(
                         Q(team_a=time_a, team_b=time_b) | 
                         Q(team_a=time_b, team_b=time_a),
-                        tournament=tournament
+                        tournament=tournament,
+                        category_of_match=category
                     ).exists()
                     
                     if not partida_existente:
                         Match.objects.create(
                             tournament=tournament,
                             category_of_match=category,
+                            group=group_obj, 
                             team_a=time_a,
                             team_b=time_b,
                             location=tournament.local,
                             start_time=datetime.combine(tournament.start_date, datetime.min.time()) + timedelta(hours=9),
                             end_time=datetime.combine(tournament.start_date, datetime.min.time()) + timedelta(hours=10)
                         )
+                        
     return redirect('chaves', pk=tournament.pk)
+
+def chaves(request, pk):
+    from django.shortcuts import get_object_or_404, render
+    from .models import Tournament, Match, Group # Importe Group
+
+    tournament = get_object_or_404(Tournament, pk=pk)
+    
+    groups = Group.objects.filter(tournament=tournament).order_by('category', 'id')
+    
+    matches = Match.objects.filter(tournament=tournament).order_by('category_of_match', 'group', 'id')
+
+    context = {
+        'tournament': tournament,
+        'matches': matches,
+        'groups': groups 
+    }
+    return render(request, 'chaves.html', context)
 
 def organizador(request):
     return render(request, 'organizador.html')
 
-def create_tournament_page(request):
-    if request.method != 'POST':
-        form = TournamentForm()
-    else: 
-        form = TournamentForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('inicio')
-    context = {'form': form}
-    return render(request, 'criar_campeonato.html', context)
+# @login_required
+# def create_tournament_page(request):
+#     if request.method != 'POST':
+#         form = TournamentForm()
+#     else: 
+#         form = TournamentForm(data=request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('inicio')
+#     context = {'form': form}
+#     return render(request, 'criar_campeonato.html', context)
 
 @login_required
 def inscrever(request, tournament_id):
