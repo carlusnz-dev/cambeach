@@ -121,3 +121,8 @@ input, select {
 .secondary:hover {
     background: #002f6c;
 }
+
+.cat {
+    display: grid;
+    margin-top: 20px;
+}
