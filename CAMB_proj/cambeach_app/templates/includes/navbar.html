@@ -33,10 +33,11 @@
         {% else %}
             <li><a href="{% url 'login' %}" class="nav-link">Login/Cadastro</a></li>
         {% endif %}
-        
-        <li>
-            <a href="{% url 'organizador' %}" class="nav-link">Organizador</a>
-        </li>
+        {%if user.is_superuser%}
+            <li>
+                <a href="{% url 'organizador' %}" class="nav-link">Organizador</a>
+            </li>
+        {% endif %}
         <li><a href="{% url 'suporte' %}" class="nav-link">Suporte</a></li>
     </ul>
 </nav>
