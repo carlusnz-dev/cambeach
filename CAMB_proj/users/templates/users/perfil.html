@@ -19,7 +19,7 @@
             <h2 class="user-name">{{ user.get_full_name|default:user.username }}</h2>
             
             {% if user.categoria_de_jogo %}
-                <span class="badge-category">{{ user.categoria_de_jogo.name }}</span>
+                <span class="badge-category">{{ user.categoria_de_jogo.name }} - {{ user.categoria_de_jogo.get_genre_display }}</span>
             {% else %}
                 <span class="badge-category">Sem Categoria</span>
             {% endif %}

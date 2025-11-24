@@ -9,12 +9,12 @@ urlpatterns = [
     path('torneio/<int:tournament_id>/inscrever/', views.inscrever, name='inscrever'),
     path('torneio/<int:pk>/chaves/', views.chaves, name='chaves'),
     path('torneio/<int:pk>/gerar_chaves/', views.gerar_chaves, name='gerar_chaves'),
-    path('torneio/create/', views.tournament_form, name='tournament_create'),
-    path('torneio/update/<int:pk>/', views.tournament_form, name='tournament_edit'),
+    path('torneio/create/', views.create_tournament_page, name='create_tournament_page'),
+    path('torneio/update/<int:pk>/', views.create_tournament_page, name='create_tournament_page'),
 
     # Organizador
     path('organizador/', views.organizador, name='organizador'),
-    path('create_tournament_page/', views.create_tournament_page, name='create_tournament_page'),
+    # path('create_tournament_page/', views.create_tournament_page, name='create_tournament_page'),
     
     # Categoria
     path('category/create/', views.category_form, name='category_create'),

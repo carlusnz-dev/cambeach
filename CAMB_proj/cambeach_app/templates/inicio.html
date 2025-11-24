@@ -36,6 +36,17 @@
     </div>
 </div>
 
+{% for tournament in tournaments %}
+    <div class="tournament-card">
+        <h3 class="tournament-name">{{ tournament.name }}</h3>
+        <p class="tournament-date">
+            Data: {{ tournament.start_date|date:"d/m/Y" }} - {{ tournament.end_date|date:"d/m/Y" }}
+        </p>
+        <p class="tournament-location">Local: {{ tournament.location }}</p>
+        <a href="{% url 'chaves' tournament.pk %}" class="details-button">Ver Detalhes</a>
+    </div>
+{% endfor %}
+
 {% comment %} <h1>TESTES</h1>
 <div>
     {% for category in categories %}
