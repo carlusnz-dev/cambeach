@@ -8,12 +8,16 @@ from .forms import CategoryForm, TournamentForm, TeamForm
 import random
 import string
 
+# pagina inicial 
+
 def inicio(request):
     tournaments = Tournament.objects.all()
     context = {
         'tournaments': tournaments
     }
     return render(request, 'inicio.html', context)
+
+# categoria
 
 def category_form(request, pk=None):
     category = None
@@ -36,6 +40,8 @@ def category_delete(request, pk):
     category.delete()
     return redirect('inicio')
 
+
+# torneio
 @login_required
 def create_tournament_page(request, pk=None):
     tournament = None
@@ -178,6 +184,7 @@ def organizador(request):
 #     context = {'form': form}
 #     return render(request, 'criar_campeonato.html', context)
 
+# inscrição no torneio
 @login_required
 def inscrever(request, tournament_id):
     torneio = get_object_or_404(Tournament, pk=tournament_id)

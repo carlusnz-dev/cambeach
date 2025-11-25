@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from .models import Category, Tournament, Team
 from users.models import Atleta
 
+# configurações de forms para duos
 class CategoryMultipleChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, obj):
         return f"{obj.name} - {obj.get_genre_display()}"
@@ -11,12 +12,14 @@ class CategoryChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         return f"{obj.name} - {obj.get_genre_display()}"
 
-
+# categoria
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ("name", "genre")
 
+
+# duos
 class TeamForm(forms.ModelForm):
     cpf_parceiro = forms.CharField(label="CPF da Dupla", max_length=14)
 

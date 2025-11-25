@@ -1,16 +1,19 @@
 from django.db import models
 from django.db.models import Q
 
+# genero
 class Gender(models.IntegerChoices):
     MALE = 1, "Masculino"
     FEMALE = 2, "Feminino"
     
+#categoria
 class Category(models.Model):
     name = models.CharField(max_length=30, null=False)
     genre = models.SmallIntegerField(choices=Gender)
     
     def __str__(self):
         return self.name
+# torneio
 class Tournament(models.Model):
     name = models.CharField(max_length=255)
     local = models.CharField(max_length=255)
@@ -29,6 +32,7 @@ class TournamentDivision(models.Model):
     max_teams = models.SmallIntegerField(default=16, verbose_name="Maximo de duplas")
 
 
+# duos
 class Team(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nome da Dupla", null=True, blank=True)    
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="teams")
@@ -45,6 +49,8 @@ class Team(models.Model):
                 pass
         
         return f"Time {self.pk} (Em formação)"
+
+# partidas
 class Match(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="matches")
     category_of_match = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="matches")
@@ -57,7 +63,9 @@ class Match(models.Model):
     location = models.CharField(max_length=255)
     score_team_a = models.SmallIntegerField(null=True, blank=True)
     score_team_b = models.SmallIntegerField(null=True, blank=True)
-    
+
+
+# grupos  
     
 class Group(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="groups")
