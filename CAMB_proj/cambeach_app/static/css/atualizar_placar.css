@@ -1,0 +1,188 @@
+/* Container Centralizado */
+.placar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+    background-color: #f4f7f6;
+}
+
+/* Cartão Principal */
+.card-placar {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+/* Cabeçalho com Tags */
+.card-header {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.torneio-tag {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #7f8c8d;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.categoria-tag {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.versus-info p {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+/* Área do Placar (Onde digita) */
+.placar-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.time-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    min-height: 50px; /* Para alinhar mesmo se um nome for maior que o outro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+}
+
+/* Estilização dos Inputs (Parecer placar digital) */
+.input-wrapper input {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+    text-align: center;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    /* Remover setinhas do input number */
+    -moz-appearance: textfield;
+}
+
+.input-wrapper input:focus {
+    border-color: #3498db;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.2);
+}
+
+/* Remover setinhas do input number (Chrome/Safari) */
+.input-wrapper input::-webkit-outer-spin-button,
+.input-wrapper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Divisor "X" central */
+.versus-divider {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #bdc3c7;
+    margin-top: 30px; /* Empurrar um pouco pra baixo pra alinhar com os inputs */
+}
+
+/* Mensagem de Erro */
+.error-msg {
+    color: #e74c3c;
+    background-color: #fadbd8;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Botões de Ação */
+.actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-salvar, .btn-cancelar {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.2s;
+    border: none;
+}
+
+.btn-salvar {
+    background-color: #2ecc71;
+    color: white;
+    flex: 2;
+}
+
+.btn-salvar:hover {
+    background-color: #27ae60;
+}
+
+.btn-cancelar {
+    background-color: #e0e0e0;
+    color: #7f8c8d;
+    flex: 1;
+}
+
+.btn-cancelar:hover {
+    background-color: #d6d6d6;
+    color: #2c3e50;
+}
+
+/* Responsividade para celular */
+@media (max-width: 480px) {
+    .placar-board {
+        flex-direction: column;
+    }
+
+    .versus-divider {
+        margin: 10px 0;
+        transform: rotate(90deg); /* O "X" vira uma cruz ou divisor vertical */
+        font-size: 1.5rem;
+    }
+
+    .time-name {
+        font-size: 1rem;
+        min-height: auto;
+    }
+    
+    .input-wrapper input {
+        width: 100px; /* Maior no mobile para facilitar o toque */
+        height: 60px;
+    }
+}

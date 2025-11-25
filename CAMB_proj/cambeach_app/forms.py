@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Category, Tournament, Team
+from .models import Category, Tournament, Team, Match
 from users.models import Atleta
 
 class CategoryMultipleChoiceField(forms.ModelMultipleChoiceField):
@@ -114,3 +114,8 @@ class TournamentForm(forms.ModelForm):
     class Meta:
         model = Tournament
         fields = '__all__'
+        
+class MatchResultForm(forms.ModelForm):
+    class Meta:
+        model = Match
+        fields = ['score_team_a', 'score_team_b']

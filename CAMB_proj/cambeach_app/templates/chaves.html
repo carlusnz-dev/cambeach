@@ -11,7 +11,7 @@
 <div class="container">
     <h1>Chaves: {{ tournament.name }}</h1>
     
-    {% if not matches %}
+    {% if not matches and not groups_data %}
         <a href="{% url 'gerar_chaves' pk=tournament.id %}" class="btn-gerar">Gerar Chaves Automaticamente</a>
     {% endif %}
 
@@ -22,75 +22,125 @@
         <p><strong>Local:</strong> {{ tournament.local }}</p>
         <p><strong>Organização:</strong> {{ tournament.organization }}</p>
         <p><strong>Período:</strong> {{ tournament.start_date|date:"d/m/Y" }} a {{ tournament.end_date|date:"d/m/Y" }}</p>
+        <p><strong>Números de inscritos atuais:</strong>
+            {{ tournament.teams.count }} duplas
+        </p>
+        <p><strong>Limite:</strong>
+            {% for division in tournament.divisions.all %}
+                {{ division.category.name }} - {{ division.max_teams }} duplas{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        <p><strong>Categorias:</strong>
+            {% for category in tournament.categories.all %}
+                {{ category.name }} - {{category.get_genre_name}} {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
     </div>
 
-    <h2>Categorias do Torneio</h2>
-    <ul>
-        {% for division in tournament.divisions.all %}
-            <li>
-                {{ division.category.name }} - {{ division.category.get_genre_display }} 
-                <small>(Máximo de Duplas: {{ division.max_teams }})</small>
-            </li>
-        {% endfor %}
-    </ul>
-
     <hr>
-
-    <h2>Jogos Agendados</h2>
     
-    {% if groups %}
+    <h2>Fase de Grupos</h2>
+    {% if groups_data %}
         <div class="grupos">
-            
-            {% for group in groups %}
-                {# O loop principal agora itera pelos grupos passados pela view #}
-                <div class="bloco-categoria">
+            {% for item in groups_data %}
+                <div class="bloco-categoria" style="margin-bottom: 40px; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #2c3e50;">Categoria: {{ item.group.category.name }}</h3>
+                    <h4 style="color: #7f8c8d;">{{ item.group.name }}</h4>
                     
-                    <h3>Categoria: {{ group.category.name }}</h3>
-                    <h4>{{ group.name }}</h4>
-                    
-                    <table class="tabela-jogos">
+                    <h5>Partidas</h5>
+                    <table class="tabela-jogos" style="width: 100%; margin-bottom: 20px;">
                         <thead>
-                            <tr>
+                            <tr style="background-color: #f2f2f2;">
                                 <th>Horário</th>
                                 <th>Time 1</th>
                                 <th>Time 2</th>
                                 <th>Placar</th>
+                                <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {# Itera pelas partidas ligadas diretamente ao grupo #}
-                            {% for match in group.matches_in_group.all %}
+                            {% for match in item.group.matches_in_group.all %}
                                 <tr>
-                                    {# Data e Hora #}
                                     <td>{{ match.start_time|date:"d/m H:i" }}</td>
-                                    
-                                    {# Jogadores (Time A) #}
-                                    <td><strong>{{ match.team_a.name }}</strong></td>
-                                    
-                                    {# Jogadores (Time B) #}
-                                    <td><strong>{{ match.team_b.name }}</strong></td>
-                                    
-                                    {# Placar #}
-                                    <td class="placar-cell">
-                                        {% if match.score_team_a is not None or match.score_team_b is not None %}
-                                            <span class="score-display">{{ match.score_team_a|default_if_none:'' }}</span>
-                                            <span>X</span>
-                                            <span class="score-display">{{ match.score_team_b|default_if_none:'' }}</span>
+                                    <td>{{ match.team_a.name }}</td>
+                                    <td>{{ match.team_b.name }}</td>
+                                    <td class="placar-cell" style="font-weight: bold;">
+                                        {% if match.score_team_a is not None %}
+                                            {{ match.score_team_a }} X {{ match.score_team_b }}
                                         {% else %}
-                                            Aguardando
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.is_staff %}
+                                            <a href="{% url 'atualizar_placar' match.id %}" style="font-size: 0.8rem; color: blue;">Editar</a>
                                         {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
-                    
+
+                    <h5>Classificação</h5>
+                    <table class="tabela-classificacao" style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background-color: #e0e0e0;">
+                                <th>Pos</th>
+                                <th>Dupla</th>
+                                <th>Pts</th>
+                                <th>V</th>
+                                <th>SG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stats in item.ranking %}
+                                <tr style="border-bottom: 1px solid #ddd;">
+                                    <td>{{ forloop.counter }}º</td>
+                                    <td>{{ stats.team.name }}</td>
+                                    <td><strong>{{ stats.points }}</strong></td>
+                                    <td>{{ stats.wins }}</td>
+                                    <td>{{ stats.games_balance }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             {% endfor %}
-            
         </div>
     {% else %}
-        <p>Nenhum grupo ou jogo gerado ainda. Clique em "Gerar Chaves Automaticamente" para iniciar.</p>
+        <p>Nenhum grupo gerado ainda.</p>
+    {% endif %}
+
+    <hr>
+    
+    <h2>Fase Final (Mata-Mata)</h2>
+    {% if user.is_staff %}
+        <div style="margin-bottom: 20px;">
+            <a href="{% url 'gerar_mata_mata' tournament.pk %}" class="btn-gerar">Gerar Mata-Mata</a>
+            <a href="{% url 'gerar_proxima_fase' tournament.pk %}" class="btn-gerar" style="background-color: #f39c12;">Gerar Próxima Fase</a>
+        </div>
+    {% endif %}
+
+    {% if mata_mata_matches %}
+        <div class="mata-mata-container">
+            {% for match in mata_mata_matches %}
+                <div class="match-card" style="border:1px solid #ccc; padding:15px; margin-bottom:10px; border-left: 5px solid red;">
+                    <h5>{{ match.get_round_display }} - {{ match.category_of_match.name }}</h5>
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.1rem; margin:10px 0;">
+                        <span>{{ match.team_a.name }}</span>
+                        <span style="background:#eee; padding:5px 15px; border-radius:10px;">
+                            {{ match.score_team_a|default:"-" }} X {{ match.score_team_b|default:"-" }}
+                        </span>
+                        <span>{{ match.team_b.name }}</span>
+                    </div>
+                    {% if user.is_staff %}
+                        <a href="{% url 'atualizar_placar' match.id %}">Editar Placar</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nenhum jogo de fase final definido ainda.</p>
     {% endif %}
 </div>
 {% endblock %}

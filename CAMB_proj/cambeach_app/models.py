@@ -11,6 +11,7 @@ class Category(models.Model):
     
     def __str__(self):
         return self.name
+
 class Tournament(models.Model):
     name = models.CharField(max_length=255)
     local = models.CharField(max_length=255)
@@ -28,12 +29,16 @@ class TournamentDivision(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="divisions")
     max_teams = models.SmallIntegerField(default=16, verbose_name="Maximo de duplas")
 
-
 class Team(models.Model):
+    class Status(models.TextChoices):
+        PENDING = 'P', 'Pendente'
+        CONFIRMED = 'C', 'Confirmado'
+
     name = models.CharField(max_length=50, verbose_name="Nome da Dupla", null=True, blank=True)    
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="teams")
     players = models.ManyToManyField("users.Atleta", related_name="teams")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="teams")
+    status = models.CharField(max_length=1, choices=Status.choices, default=Status.PENDING)
 
     def __str__(self):
         if self.pk:
@@ -43,12 +48,25 @@ class Team(models.Model):
                     return " / ".join(nomes)
             except Exception:
                 pass
-        
         return f"Time {self.pk} (Em formação)"
+
+class Group(models.Model):
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="groups")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="groups")
+    name = models.CharField(max_length=50)
+    teams = models.ManyToManyField(Team, related_name="groups")
+
 class Match(models.Model):
+    class Round(models.TextChoices):
+        GROUP = 'G', 'Fase de Grupos'
+        OITAVAS = 'O', 'Oitavas de Final'
+        QUARTAS = 'Q', 'Quartas de Final'
+        SEMI = 'S', 'Semifinal'
+        FINAL = 'F', 'Final'
+
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="matches")
     category_of_match = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="matches")
-    group = models.ForeignKey('Group', on_delete=models.CASCADE, related_name="matches_in_group", null=True, blank=True)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="matches_in_group", null=True, blank=True)
     
     team_a = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="team_a_matches")
     team_b = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="team_b_matches")
@@ -58,10 +76,8 @@ class Match(models.Model):
     score_team_a = models.SmallIntegerField(null=True, blank=True)
     score_team_b = models.SmallIntegerField(null=True, blank=True)
     
-    
-class Group(models.Model):
-    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name="groups")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="groups")
-    name = models.CharField(max_length=50)
-
-    teams = models.ManyToManyField(Team, related_name="groups")   
+    round = models.CharField(
+        max_length=1, 
+        choices=Round.choices, 
+        default=Round.GROUP
+    )

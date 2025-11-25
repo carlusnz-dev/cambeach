@@ -59,6 +59,17 @@
                 {% endfor %}
             </ul>
         </div>
+
+        <h3>Convites Pendentes</h3>
+            {% for team in my_teams %}
+                {% if team.status == 'P' %}
+                    <div class="alert alert-warning">
+                        Voce foi convidado para a dupla: {{ team.name }} no torneio {{ team.tournament.name }}.
+                        <a href="{% url 'aceitar_convite' team.id %}">Aceitar</a>
+                        <a href="{% url 'recusar_convite' team.id %}">Recusar</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
     </aside>
 
     <main class="profile-main">

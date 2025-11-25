@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Atualizar Placar - CamBeach{% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/atualizar_placar.css' %}" />
+{% endblock extra_css %}
+
+{% block content %}
+<div class="placar-container">
+    <div class="card-placar">
+        
+        <header class="card-header">
+            <span class="torneio-tag">{{ match.tournament.name }}</span>
+            <span class="categoria-tag">{{ match.category_of_match.name }} - {{ match.group.name }}</span>
+        </header>
+
+        <div class="versus-info">
+            <p>Defina o resultado final da partida</p>
+        </div>
+
+        <form method="post" class="form-placar">
+            {% csrf_token %}
+            
+            <div class="placar-board">
+                <div class="time-box">
+                    <label class="time-name" for="{{ form.score_team_a.id_for_label }}">
+                        {{ match.team_a.name }}
+                    </label>
+                    <div class="input-wrapper">
+                        {{ form.score_team_a }}
+                    </div>
+                </div>
+
+                <div class="versus-divider">
+                    <span>X</span>
+                </div>
+
+                <div class="time-box">
+                    <label class="time-name" for="{{ form.score_team_b.id_for_label }}">
+                        {{ match.team_b.name }}
+                    </label>
+                    <div class="input-wrapper">
+                        {{ form.score_team_b }}
+                    </div>
+                </div>
+            </div>
+
+            {% if form.errors %}
+                <div class="error-msg">
+                    Verifique os valores inseridos.
+                </div>
+            {% endif %}
+
+            <div class="actions">
+                <a href="{% url 'chaves' match.tournament.pk %}" class="btn-cancelar">Cancelar</a>
+                <button type="submit" class="btn-salvar">Confirmar Resultado</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

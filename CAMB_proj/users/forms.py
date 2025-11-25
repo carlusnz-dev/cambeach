@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelChoiceField # Importe a classe base
+from django.forms import ModelChoiceField
 from .models import Atleta
-from cambeach_app.models import Category
+from cambeach_app.models import Category 
 
 class CategoryChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
@@ -23,10 +23,6 @@ class AtletaCreationForm(UserCreationForm):
         widget=forms.DateInput(attrs={'type': 'date'}),
         input_formats=['%Y-%m-%d', '%d/%m/%Y']
     )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['categoria_de_jogo'].queryset = Category.objects.all()
 
     class Meta(UserCreationForm.Meta):
         model = Atleta
