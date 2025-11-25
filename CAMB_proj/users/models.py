@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 
+# atleta manager
 class AtletaManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         if not email:
@@ -22,6 +23,8 @@ class AtletaManager(BaseUserManager):
             raise ValueError('Superuser deve ter is_superuser=True.')
 
         return self.create_user(email, password, **extra_fields)
+
+# atleta model
 class Atleta(AbstractUser):
     username = None 
     email = models.EmailField(unique=True)

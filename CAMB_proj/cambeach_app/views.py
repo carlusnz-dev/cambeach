@@ -13,10 +13,14 @@ from .utils import calcular_classificacao
 import random
 import string
 
+# pagina inicial 
+
 def inicio(request):
     tournaments = Tournament.objects.all()
     context = {'tournaments': tournaments}
     return render(request, 'inicio.html', context)
+
+# categoria
 
 def category_form(request, pk=None):
     category = None
@@ -39,6 +43,8 @@ def category_delete(request, pk):
     category.delete()
     return redirect('inicio')
 
+
+# torneio
 @login_required
 def create_tournament_page(request, pk=None):
     tournament = None

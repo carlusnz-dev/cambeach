@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from cambeach_app.models import Team, Match
 
+# cadastro de usuário
 def cadastro(request):
     if request.method != 'POST':
         form = AtletaCreationForm()
@@ -17,15 +18,16 @@ def cadastro(request):
 
     return render(request=request, template_name='users/cadastro.html', context={'form': form})
 
+# logout de usuário
 def logout_view(request):
     logout(request)
     return redirect('inicio')
 
+# perfil do usuário
 @login_required
 def perfil(request):
     user = request.user
     
-    # filtros
     my_teams = Team.objects.filter(players=user).select_related('tournament', 'category')
     all_matches = Match.objects.filter(
         Q(team_a__players=user) | Q(team_b__players=user)

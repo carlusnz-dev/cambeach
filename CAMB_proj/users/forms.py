@@ -4,10 +4,12 @@ from django.forms import ModelChoiceField
 from .models import Atleta
 from cambeach_app.models import Category 
 
+# Customização do campo de escolha para exibir nome e gênero da categoria
 class CategoryChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
         return f"{obj.name} - {obj.get_genre_display()}"
 
+# Formulário de criação de Atleta
 class AtletaCreationForm(UserCreationForm):
     
     categoria_de_jogo = CategoryChoiceField(

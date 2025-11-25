@@ -1,10 +1,12 @@
 from django.db import models
 from django.db.models import Q
 
+# genero
 class Gender(models.IntegerChoices):
     MALE = 1, "Masculino"
     FEMALE = 2, "Feminino"
     
+#categoria
 class Category(models.Model):
     name = models.CharField(max_length=30, null=False)
     genre = models.SmallIntegerField(choices=Gender)
@@ -56,6 +58,8 @@ class Group(models.Model):
     name = models.CharField(max_length=50)
     teams = models.ManyToManyField(Team, related_name="groups")
 
+
+# partidas
 class Match(models.Model):
     class Round(models.TextChoices):
         GROUP = 'G', 'Fase de Grupos'
@@ -75,7 +79,8 @@ class Match(models.Model):
     location = models.CharField(max_length=255)
     score_team_a = models.SmallIntegerField(null=True, blank=True)
     score_team_b = models.SmallIntegerField(null=True, blank=True)
-    
+
+
     round = models.CharField(
         max_length=1, 
         choices=Round.choices, 
