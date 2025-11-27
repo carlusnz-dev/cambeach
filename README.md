@@ -1,16 +1,26 @@
-# CamBeach
-Gerenciamento de campeonato de Beach Tênis
+# 🏖️ Cambeach
 
-## Estrutura
-- cambeach = BACKEND DJANGO
-- cambeach-front = FRONTEND
+Cambeach é um projeto Full-Stack usado para gerenciamento de torneios de Beach Tênis em Curitiba, utilizando a framework Django.
 
-## Criar Ambiente Virtual
-```bash
-python -m venv NOME_DA_SUA_VENV
-``` 
+## 🚀 Tecnologias Principais
 
-Depois disso, instale o Django e dependências do requiriments.txt
+| Área | Tecnologia | Propósito |
+| :--- | :--- | :--- |
+| **Backend API** | Python, Flask | Desenvolvimento do back-end e manipulação de dados no servidor. |
+| **Frontend UI** | HTML e JS | Utilização nos templates do Django |
+| **Estilização** | CSS | Estilização do UI do site para boa experiência do usuário |
 
-## Avisos
-Dê **git pull** antes de qualquer alteração no código
+---
+
+## ⚙️ Funcionalidades do Backend (Django)
+
+O Django controla todo o escopo do projeto, desde a criação dos torneios até o gerenciamento das partidas (editar placar, resultados, inscrições etc.)
+
+---
+
+## ⏭️ Próximos Passos (Evolução do Projeto)
+
+Para levar o Cambeach à produção, as seguintes etapas arquitetônicas são recomendadas:
+
+1. **Atualizar front-end para uso do NextJS**: mudar o front-end para NextJS e utilizar API REST.
+2. **Implementação em torneios reais**: utilizar o sistema para implementação em torneios reais.
